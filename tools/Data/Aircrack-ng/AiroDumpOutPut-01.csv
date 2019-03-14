@@ -1,0 +1,14 @@
+
+BSSID, First time seen, Last time seen, channel, Speed, Privacy, Cipher, Authentication, Power, # beacons, # IV, LAN IP, ID-length, ESSID, Key
+EC:08:6B:F3:DA:F8, 2019-03-13 22:26:36, 2019-03-13 22:26:40,  1,  54, WPA2, CCMP,PSK, -54,        8,        5,   0.  0.  0.  0,  14, Casal do Mar 1, 
+E2:B9:E5:A7:9B:26, 2019-03-13 22:26:38, 2019-03-13 22:26:39, 11,  54, OPN, ,   , -71,        2,        0,   0.  0.  0.  0,   8, MEO-WiFi, 
+E0:B9:E5:A7:9B:25, 2019-03-13 22:26:39, 2019-03-13 22:26:39, 11,  54, WPA2 WPA, CCMP TKIP,PSK, -69,        1,        1,   0.  0.  0.  0,  10, MEO-A79B25, 
+BC:F2:AF:9F:9D:0D, 2019-03-13 22:26:39, 2019-03-13 22:26:39, 11,  54, WPA2, CCMP,PSK, -81,        2,        0,   0.  0.  0.  0,  19, devolo-bcf2af9f9d0d, 
+30:D3:2D:19:18:FC, 2019-03-13 22:26:39, 2019-03-13 22:26:39,  6,  -1, , ,   ,  -1,        0,        0,   0.  0.  0.  0,   0, , 
+68:B6:FC:EB:76:48, 2019-03-13 22:26:39, 2019-03-13 22:26:39,  6,  54, WPA2, CCMP TKIP,PSK, -86,        1,        0,   0.  0.  0.  0,   8, ZON-7640, 
+
+Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs
+9C:AE:D3:0B:8C:3E, 2019-03-13 22:26:36, 2019-03-13 22:26:40, -62,        6, EC:08:6B:F3:DA:F8,
+04:D6:AA:F4:B5:8E, 2019-03-13 22:26:39, 2019-03-13 22:26:39, -69,        2, 30:D3:2D:19:18:FC,
+38:F7:3D:3B:F4:D0, 2019-03-13 22:26:40, 2019-03-13 22:26:40, -63,        2, EC:08:6B:F3:DA:F8,
+
