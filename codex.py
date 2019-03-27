@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.0.0---#
+#---Version 2.0.1---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -105,6 +105,9 @@ class Verify():
                 print(f'{C}----------{W}')
                 print()
                 newinterface = input('Please write your new default interface: ')
+
+                with open('Data/DATA.json') as f:
+                    data = json.load(f)
 
                 data['DefaultInfo'][0]['defaultinterface'] = defaultinterface = newinterface
                 with open('Data/DATA.json', 'w') as f:
@@ -1520,5 +1523,68 @@ class NMAPScan():
                 defaultipaddr = input('Please enter your ip address: ')
 
                 return NMAPScan.SpecificPort()
+
+class Defaults():
+
+    def IP():
+
+        with open('Data/DATA.json') as f:
+            data = json.load(f)
+        newip = input("Please enter your new default ip address: ")
+        data['DefaultInfo'][0]['defaultipaddress'] = defaultipaddr = newip
+        with open('Data/DATA.json', 'w') as f:
+            json.dump(data, f, indent = 2)
+        OS()
+        print("Default ip address changed to " + newip)
+        return StartMenu()
+
+    def PortRange():
+        with open('Data/DATA.json') as f:
+            data = json.load(f)
+
+            newport = input("Please enter your new default port range: ")
+            data['DefaultInfo'][0]['defaultportrange'] = portrange = newport
+
+            with open('Data/DATA.json', 'w') as f:
+                json.dump(data, f, indent = 2)
+
+            OS()
+            print("Default port range changed to " + newport)
+            return Menus.StartMenu()
+
+    def Interface():
+
+        global interface
+        global newinterface
+
+        with open('Data/DATA.json') as f:
+            data = json.load(f)
+
+        for DefaultInfo in data['DefaultInfo']:
+            interface = DefaultInfo['defaultinterface']
+
+        OS()
+        print(f'{B}********** Please select your default interface **********{W}')
+        print(*(W + '{}) {}'.format(x, y) for (x, y) in enumerate(NetworkInterfaces, 1)), sep='\n')
+        print()
+        print(f'{C}----------')
+        print(f'{G}Note: You can change the interface later if you need!')
+        print(f'{C}----------')
+        print(f'{P}Contribution: We are looking for a way to make it so you dont need to write the hole interface name and only a number!')
+        print(f'{C}----------{W}')
+        print()
+        newinterface = input('Please write your new default interface: ')
+
+        data['DefaultInfo'][0]['defaultinterface'] = defaultinterface = newinterface
+        with open('Data/DATA.json', 'w') as f:
+            json.dump(data, f, indent = 2)
+
+        data['DefaultInfo'][0]['defaultinterface'] = defaultinterface = interface
+        with open('Data/DATA.json', 'w') as f:
+            json.dump(data, f, indent = 2)
+
+        print("Interface changed to " + interface)
+
+        return Menus.StartMenu()
 
 Verify.CheckAdminPrivs()
