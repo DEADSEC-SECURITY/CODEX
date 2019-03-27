@@ -31,4 +31,5 @@ Discord: https://discord.gg/dFD5HHa
 Console commands:
 
 $ sudo python3 Setup.py
+
 $ sudo python3 codex.py
