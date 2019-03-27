@@ -3,15 +3,7 @@
     {
       "defaultportrange": "1-1000",
       "defaultipaddress": "127.0.0.1",
-      "defaultinterface": "wlp3s0"
-    }
-  ],
-  "DataInfo": [
-    {
-      "BSSID": "NONE",
-      "Channel": "NONE",
-      "ESSID": "NONE",
-      "Encryption": "NONE"
+      "defaultinterface": "NONE"
     }
   ]
 }

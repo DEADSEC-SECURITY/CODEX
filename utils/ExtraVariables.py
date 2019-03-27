@@ -1,26 +1,23 @@
-import datetime
-import netifaces
+#-----------Welcome to DeAdSeC Python Codex----------#
+#-------Made By DeAdSeC-------#
+#---Version 1.0.0---#
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-Banner = """     __       ______   ______    _______   __________   ___     __
+Banner = '''     __       ______   ______    _______   __________   ___     __
     |  |     /      | /  __  \  |       \ |   ____\  \ /  /    |  |
     |  |    |  ,----'|  |  |  | |  .--.  ||  |__   \  V  /     |  |
     |  |    |  |     |  |  |  | |  |  |  ||   __|   >   <      |  |
     |__|    |  `----.|  `--'  | |  '--'  ||  |____ /  .  \     |__|
-    (__)     \______| \______/  |_______/ |_______/__/ \__\    (__) """
+    (__)     \______| \______/  |_______/ |_______/__/ \__\    (__) '''
 
 
-Dead = f"""
+Dead = f'''
               		By         : DeAdSeC
-              		Version    : 1.0.0
+              		Version    : 1.0.1
               		GitHub     : REP
               		Discord    : DISC
-              		"""
-                    
-#Please dont change any of these variables!
-NetworkInterfaces = netifaces.interfaces()
-now = datetime.datetime.now()
-date = now.strftime("%Y-%m-%d %H:%M")
-
+              		'''
 #DEFAULT SETTINGS [DONT CHANGE]
 bssid = 'NONE'
 channel = 'NONE'
