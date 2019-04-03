@@ -106,6 +106,9 @@ class Verify():
                 print()
                 newinterface = input('Please write your new default interface: ')
 
+                with open('Data/DATA.json') as f:
+                    data = json.load(f)
+
                 data['DefaultInfo'][0]['defaultinterface'] = defaultinterface = newinterface
                 with open('Data/DATA.json', 'w') as f:
                     json.dump(data, f, indent = 2)
@@ -727,6 +730,7 @@ class AiroDump():
                     return Menus.NET()
             number = number + 1
 
+#Class for bruteforce
 class Bruteforce():
 
     def DicAircrack():
