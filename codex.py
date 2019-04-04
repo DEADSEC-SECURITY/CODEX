@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.0.0---#
+#---Version 3.0.0---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -270,7 +270,7 @@ class Menus():
         if OptionWeb == 0:
             return StartMenu()
         if OptionWeb == 1:
-            pass
+            return WEBAM.FWC()
         if OptionWeb == 2:
             pass
 
@@ -458,6 +458,20 @@ class Menus():
             return Bruteforce.BruteHashcat()
         if offlineOption == 5:
             return Bruteforce.RuleHashcat()
+
+#Class for Web Attack
+class WEBAM():
+    def FWC():
+        WebNoHTTP = input('Please enter the website you want to scan with out "http(s)://": ')
+        httpORhttps = input('Is the website http (1) or https (2): ')
+        if httpORhttps == 1:
+            WebWithHTTP = 'http://' +  WebNoHTTP
+        if httpORhttps == 2:
+            WebWithHTTPS = 'https://' + WebNoHTTP
+        else:
+            print('Please use 1 for http or 2 for https')
+            print(f'Press {O}ENTER{W} to continue')
+            return Menus.WEB()
 
 #Class for interface settings
 class InterfaceOptions():
