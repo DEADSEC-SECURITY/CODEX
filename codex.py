@@ -1,10 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-<<<<<<< HEAD
-#---Version 3.0.0---#
-=======
-#---Version 2.0.1---#
->>>>>>> ebeab70c784e0a8e3ef21211e1b94c0c41e92fee
+#---Version 2.1.0---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -53,13 +49,19 @@ class Verify():
     #LOADS JSON FILES
     def LoadJson():
 
+        global interface
         global newinterface
+        global ip
+        global port
 
         with open('Data/DATA.json') as f:
             data = json.load(f)
 
         for DefaultInfo in data['DefaultInfo']:
+            interface = DefaultInfo['defaultinterface']
             newinterface = DefaultInfo['defaultinterface']
+            port = DefaultInfo['defaultportrange']
+            ip = DefaultInfo['defaultipaddress']
 
         return Verify.DefaultInterface()
 
@@ -69,30 +71,30 @@ class Verify():
         global interface
         global mode
 
-        process = subprocess.Popen(['cat', f'/sys/class/net/{newinterface}/carrier'], stdout = subprocess.PIPE)
+        process = subprocess.Popen(['cat', f'/sys/class/net/{interface}/carrier'], stdout = subprocess.PIPE)
         text = str(process.communicate()[0])
         CleanText = text[2:-3]
 
         if CleanText == '1':
-            interface = newinterface
+            interface = interface
             mode = 'managed'
             return Menus.StartMenu()
 
         if CleanText != '1':
-            interface = newinterface + 'mon'
+            interface = interface + 'mon'
             mode = 'monitor'
             return Menus.StartMenu()
 
         else:
             OS()
-            print(f'Problem loading interface please check line 45')
+            print(f'Problem loading interface please check line 67')
             input(f'Press {O}ENTER{W} to continue')
             sys.exit()
 
     #CHECKS FOR EXISTING DEFAULT INETERFACE
     def DefaultInterface():
 
-            global newinterface
+            global interface
 
             #Netifaces
             NetworkInterfaces = netifaces.interfaces()
@@ -108,14 +110,17 @@ class Verify():
                 print(f'{P}Contribution: We are looking for a way to make it so you dont need to write the hole interface name and only a number!')
                 print(f'{C}----------{W}')
                 print()
-                newinterface = input('Please write your new default interface: ')
+                interface = input('Please write your new default interface: ')
 
                 with open('Data/DATA.json') as f:
                     data = json.load(f)
 
-                data['DefaultInfo'][0]['defaultinterface'] = defaultinterface = newinterface
+                data['DefaultInfo'][0]['defaultinterface'] = interface
                 with open('Data/DATA.json', 'w') as f:
                     json.dump(data, f, indent = 2)
+
+                print(f"Interface changed to {O}{interface}{W}")
+                input(f'Press {O}ENTER{W} to continue')
 
                 return Verify.CheckInterfaceState()
             else:
@@ -137,7 +142,7 @@ class Menus():
         print('0) Exit script')
         print('1) WEB Attacks')
         print('2) Network Attacks')
-        print('3) Offline WPA/WPA2 decrypt')
+        print('3) Decrypt Menu')
         print(f'{B}**************** Options *****************{W}')
         print('4) Change interface')
         print(f'{B}************ Default Files ***************{W}')
@@ -181,9 +186,9 @@ class Menus():
         if OptionMenu == 2:
             return Menus.NET()
         if OptionMenu == 3:
-            return Menus.OFFLINE_DECRYPT()
+            return Menus.OFFLINE_DECRYPT_WPA()
         if OptionMenu == 4:
-            return Tools.InterfaceSelect('StartMenu')
+            return InterfaceOptions.InterfaceSelect('StartMenu')
         if OptionMenu == 5:
             return Defaults.IP()
         if OptionMenu == 6:
@@ -251,7 +256,7 @@ class Menus():
         if OptionNet == 6:
             return Menus.HANDSHAKE()
         if OptionNet == 7:
-            pass
+            return Menus.OFFLINE_DECRYPT_WPA()
         if OptionNet == 8:
             pass
         if OptionNet == 9:
@@ -268,11 +273,15 @@ class Menus():
         print('0) Exit script')
         print('1) Full Website Check')
         print('2) SQL Injection')
+        print()
+        print(f'{C}----------{W}')
+        print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
+        print(f'{C}----------{W}')
 
         OptionWeb = int(input())
 
         if OptionWeb == 0:
-            return StartMenu()
+            return Menus.StartMenu()
         if OptionWeb == 1:
             return WEBAM.FWC()
         if OptionWeb == 2:
@@ -429,7 +438,7 @@ class Menus():
                 return Menus.HANDSHAKE()
 
     #OFFLINE_DECRYPT MENU
-    def OFFLINE_DECRYPT():
+    def OFFLINE_DECRYPT_WPA():
 
         OS()
         print()
@@ -468,10 +477,15 @@ class WEBAM():
     def FWC():
         WebNoHTTP = input('Please enter the website you want to scan with out "http(s)://": ')
         httpORhttps = input('Is the website http (1) or https (2): ')
+        WebNoWWW = WebNoHTTP[4:]
+        WebWithHTTP = 'http://' +  WebNoHTTP
+        WebWithHTTPS = 'https://' + WebNoHTTP
         if httpORhttps == 1:
-            WebWithHTTP = 'http://' +  WebNoHTTP
+            process = subprocess.Popen(['whois', WebNoWWW], stdin = subprocess.PIPE)
+            WhoisOutput = str(process.communicate()[0])
         if httpORhttps == 2:
-            WebWithHTTPS = 'https://' + WebNoHTTP
+            process = subprocess.Popen(['whois', WebNoWWW], stdin = subprocess.PIPE)
+            WhoisOutput = str(process.communicate()[0])
         else:
             print('Please use 1 for http or 2 for https')
             print(f'Press {O}ENTER{W} to continue')
@@ -1046,7 +1060,11 @@ class NMAPScan():
         print('2) TCP Scan')
         print('3) UDP Scan')
         print('4) Scan for a specified port')
-        print(f'{C}------------{W}')
+        print()
+        print(f'{C}----------{W}')
+        print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
+        print(f'{C}----------{W}')
+
 
         menuoption = int(input())
 
@@ -1543,6 +1561,7 @@ class NMAPScan():
 
                 return NMAPScan.SpecificPort()
 
+#Class for defaults
 class Defaults():
 
     def IP():
@@ -1550,19 +1569,25 @@ class Defaults():
         with open('Data/DATA.json') as f:
             data = json.load(f)
         newip = input("Please enter your new default ip address: ")
-        data['DefaultInfo'][0]['defaultipaddress'] = defaultipaddr = newip
+        data['DefaultInfo'][0]['defaultipaddress'] = newip
         with open('Data/DATA.json', 'w') as f:
             json.dump(data, f, indent = 2)
         OS()
         print("Default ip address changed to " + newip)
-        return StartMenu()
+        return Menus.StartMenu()
 
     def PortRange():
         with open('Data/DATA.json') as f:
             data = json.load(f)
 
+            OS()
+            print(R + Banner)
+            print(G + Dead + W)
+            print(f'{B}********** Please select your default interface **********{W}')
+            print()
+            print()
             newport = input("Please enter your new default port range: ")
-            data['DefaultInfo'][0]['defaultportrange'] = portrange = newport
+            data['DefaultInfo'][0]['defaultportrange'] = newport
 
             with open('Data/DATA.json', 'w') as f:
                 json.dump(data, f, indent = 2)
@@ -1574,7 +1599,9 @@ class Defaults():
     def Interface():
 
         global interface
-        global newinterface
+
+        #Netifaces
+        NetworkInterfaces = netifaces.interfaces()
 
         with open('Data/DATA.json') as f:
             data = json.load(f)
@@ -1592,18 +1619,15 @@ class Defaults():
         print(f'{P}Contribution: We are looking for a way to make it so you dont need to write the hole interface name and only a number!')
         print(f'{C}----------{W}')
         print()
-        newinterface = input('Please write your new default interface: ')
+        interface = input('Please write your new default interface: ')
 
-        data['DefaultInfo'][0]['defaultinterface'] = defaultinterface = newinterface
+        data['DefaultInfo'][0]['defaultinterface'] = interface
         with open('Data/DATA.json', 'w') as f:
             json.dump(data, f, indent = 2)
 
-        data['DefaultInfo'][0]['defaultinterface'] = defaultinterface = interface
-        with open('Data/DATA.json', 'w') as f:
-            json.dump(data, f, indent = 2)
+        print(f"Interface changed to {O}{interface}{W}")
+        input(f'Press {O}ENTER{W} to continue')
 
-        print("Interface changed to " + interface)
-
-        return Menus.StartMenu()
+        return Verify.CheckInterfaceState()
 
 Verify.CheckAdminPrivs()

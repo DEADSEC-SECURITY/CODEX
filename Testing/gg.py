@@ -2,9 +2,8 @@ import subprocess
 import time
 import os
 import pandas
+import shlex
 
-handshakePath = '/home/tony/Desktop/LAB/PROJETOS PYTHON/CODEX/oi.txt'
-begin = '.'
-HSP = handshakePath
-HSPFormat = HSP[HSP.find(begin):]
-print(HSPFormat)
+WebNoHTTP = 'www.tmg.pt'
+WebNoWWW = WebNoHTTP[4:]
+print(WebNoWWW)

@@ -1,7 +1,7 @@
 {
   "DefaultInfo": [
     {
-      "defaultportrange": "1-1000",
+      "defaultportrange": "22-445",
       "defaultipaddress": "127.0.0.1",
       "defaultinterface": "NONE"
     }
