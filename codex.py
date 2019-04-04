@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.1.1---#
+#---Version 2.1.2---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -20,13 +20,11 @@ from utils.colors import *
 from utils.ExtraVariables import *
 #Variables
 TraceBack = 1         # 0 For OFF | 1 For ON
+#TRACEBACK
+sys.tracebacklimit = TraceBack
 #AIRODUMP VARIABLES
 FileName = 'AiroDumpOutPut' #You can edit this variable
 Directory = 'Data/Aircrack-ng/' #You can edit this variable
-FileNameCSV = f'{FileName}-01.csv' #Dont edit this variable
-ExplorePath = os.path.isfile(f'{Directory}{FileNameCSV}') #Dont edit this variable
-#TRACEBACK
-sys.tracebacklimit = TraceBack
 #NMAP
 nm = nmap.PortScanner()
 
@@ -204,8 +202,6 @@ class Menus():
     #NET MENU
     def NET():
 
-        global Menu
-
         OS()
         print()
         print(R + Banner)
@@ -291,7 +287,6 @@ class Menus():
     #DOS MENU
     def DOS():
 
-        global Menu
 
         OS()
         print()
@@ -333,7 +328,7 @@ class Menus():
             return InterfaceOptions.managed('DOS')
         if DosOption == 4:
             if mode == 'monitor':
-                return AiroDump.Explorer('NET')
+                return AiroDump.Explorer('DOS')
             if mode == 'managed':
                 print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
@@ -367,7 +362,6 @@ class Menus():
     #HANDSHAKE MENU
     def HANDSHAKE():
 
-        global Menu
 
         Dir = "Data/HandShakes"
         ListDir = os.listdir(Dir)
@@ -711,9 +705,13 @@ class Attacks():
 class AiroDump():
 
     def Explorer(Menu):
+
+        FileNameCSV = f'{FileName}-01.csv'
+        ExplorePath = os.path.isfile(f'{Directory}{FileNameCSV}')
+
         if ExplorePath == True:
             os.remove(f'{Directory}{FileNameCSV}')
-            os.system(f'xterm -geometry 100x20-0+0 -e sudo airodump-ng -w {Directory}{FileName} --output-format csv {interface}')
+            os.system(f'xterm -geometry 140x30-0+0 -e sudo airodump-ng -w {Directory}{FileName} --output-format csv {interface}')
             return AiroDump.Decoder(Menu)
         else:
             os.system(f'sudo airodump-ng -w {Directory}{FileName} --output-format csv {interface}')
@@ -721,11 +719,12 @@ class AiroDump():
 
     def Decoder(Menu):
 
-        global bssid
+        global id
         global channel
         global essid
         global encrypt
 
+        FileNameCSV = f'{FileName}-01.csv'
         CS = pandas.read_csv(f'{Directory}{FileNameCSV}')
         stop_row = CS[CS.BSSID == 'Station MAC'].index[0] -1
 
