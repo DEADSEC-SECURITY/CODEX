@@ -1,11 +1,12 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.1.0---#
+#---Version 2.1.1---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #IMPORT DEPENDENCYS
+from tld import get_tld
 import sys
 import os
 import json
@@ -140,7 +141,7 @@ class Menus():
         print(G + Dead)
         print(f'{B}************ Welcome to Codex ************{W}')
         print('0) Exit script')
-        print('1) WEB Attacks')
+        print(f'1) WEB Attacks {O}[WORK IN PROGRESS]{W}')
         print('2) Network Attacks')
         print('3) Decrypt Menu')
         print(f'{B}**************** Options *****************{W}')
@@ -186,7 +187,7 @@ class Menus():
         if OptionMenu == 2:
             return Menus.NET()
         if OptionMenu == 3:
-            return Menus.OFFLINE_DECRYPT_WPA()
+            return Menus.OFFLINE_DECRYPT()
         if OptionMenu == 4:
             return InterfaceOptions.InterfaceSelect('StartMenu')
         if OptionMenu == 5:
@@ -270,7 +271,7 @@ class Menus():
         print(R + Banner)
         print(G + Dead)
         print(f'{B}************ Web Attack Menu ************{W}')
-        print('0) Exit script')
+        print('0) Return to main menu')
         print('1) Full Website Check')
         print('2) SQL Injection')
         print()
@@ -438,6 +439,26 @@ class Menus():
                 return Menus.HANDSHAKE()
 
     #OFFLINE_DECRYPT MENU
+    def OFFLINE_DECRYPT():
+        OS()
+        print()
+        print(R + Banner)
+        print(G + Dead)
+        print(f'{B}************ Decrypt Menu ************{W}')
+        print('0) Return to main menu')
+        print('1) WPA/WPA2 decrypt menu')
+        print('')
+        print(f'{C}----------{W}')
+        print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
+        print(f'{C}----------{W}')
+        offlineOption = int(input())
+
+        if offlineOption == 0:
+            return Menus.StartMenu()
+        if offlineOption == 1:
+            return Menus.OFFLINE_DECRYPT_WPA()
+
+    #OFFLINE_DECRYPT_WPA MENU
     def OFFLINE_DECRYPT_WPA():
 
         OS()
@@ -475,21 +496,16 @@ class Menus():
 #Class for Web Attack
 class WEBAM():
     def FWC():
-        WebNoHTTP = input('Please enter the website you want to scan with out "http(s)://": ')
-        httpORhttps = input('Is the website http (1) or https (2): ')
-        WebNoWWW = WebNoHTTP[4:]
-        WebWithHTTP = 'http://' +  WebNoHTTP
-        WebWithHTTPS = 'https://' + WebNoHTTP
-        if httpORhttps == 1:
-            process = subprocess.Popen(['whois', WebNoWWW], stdin = subprocess.PIPE)
-            WhoisOutput = str(process.communicate()[0])
-        if httpORhttps == 2:
-            process = subprocess.Popen(['whois', WebNoWWW], stdin = subprocess.PIPE)
-            WhoisOutput = str(process.communicate()[0])
-        else:
-            print('Please use 1 for http or 2 for https')
-            print(f'Press {O}ENTER{W} to continue')
-            return Menus.WEB()
+        Web = input('Please enter the website you want to scan: ')
+        TLD = get_tld(Web, as_object = True)
+        WebNoWWWNoHTTP = TLD.fld
+
+        OS()
+        print('Starting ...')
+        process = os.popen(f'whois {TLD}')
+        WhoisOutput = str(process.read())
+
+        print(WhoisOutput)
 
 #Class for interface settings
 class InterfaceOptions():
