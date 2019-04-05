@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.1.4---#
+#---Version 2.1.5---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -471,7 +471,7 @@ class Menus():
         if offlineOption == '1':
             return Menus.OFFLINE_DECRYPT_WPA()
         if offlineOption == '':
-            return Menus.OFFLINE_DECRYPT2()
+            return Menus.OFFLINE_DECRYPT()
         else:
             print(f'Please use only numbers between {O}1{W} and{O} 1{W}')
             input(f'Press {O}ENTER{W} to continue')
