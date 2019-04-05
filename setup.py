@@ -22,7 +22,7 @@ else:
     print(f'{Plus}{G} Installing PANDAS ...{W}')
     os.system('pip3 install pandas')
     print(f'{Plus}{G} Installing NMAP ...{W}')
-    os.system('pip3 install nmap')
+    os.system('pip3 install python-nmap')
     print(f'{Plus}{G} Installing NETIFACES ...{W}')
     os.system('pip3 install netifaces')
     print(f'{R}Starting 3º party Setup for CODEX')
