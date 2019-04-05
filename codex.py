@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.1.3---#
+#---Version 2.1.4---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -157,9 +157,9 @@ class Menus():
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
 
-        OptionMenu = int(input())
+        OptionMenu = str(input())
 
-        if OptionMenu == 0:
+        if OptionMenu == '0':
             if mode == 'monitor':
                 print(f'Would you like to preserve {O}monitor{W} mode?')
                 PO = input()
@@ -180,22 +180,24 @@ class Menus():
             else:
                 print('Exiting script!')
                 return sys.exit()
-        if OptionMenu == 1:
+        if OptionMenu == '1':
             return Menus.WEB()
-        if OptionMenu == 2:
+        if OptionMenu == '2':
             return Menus.NET()
-        if OptionMenu == 3:
+        if OptionMenu == '3':
             return Menus.OFFLINE_DECRYPT()
-        if OptionMenu == 4:
+        if OptionMenu == '4':
             return InterfaceOptions.InterfaceSelect('StartMenu')
-        if OptionMenu == 5:
+        if OptionMenu == '5':
             return Defaults.IP()
-        if OptionMenu == 6:
+        if OptionMenu == '6':
             return Defaults.PortRange()
-        if OptionMenu == 7:
+        if OptionMenu == '7':
             return Defaults.Interface()
+        if OptionMenu == '':
+            return Menus.StartMenu()
         else:
-            print(f'Please use only numbers between {O}1{W} and{O} 6{W}')
+            print(f'Please use only numbers between {O}0{W} and{O} 6{W}')
             input(f'Press {O}ENTER{W} to continue')
             return Menus.StartMenu()
 
@@ -231,33 +233,39 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
-        OptionNet = int(input())
+        OptionNet = str(input())
 
-        if OptionNet == 0:
+        if OptionNet == '0':
             return Menus.StartMenu()
-        if OptionNet == 1:
+        if OptionNet == '1':
             return InterfaceOptions.InterfaceSelect('NET')
-        if OptionNet == 2:
+        if OptionNet == '2':
             return InterfaceOptions.monitor('NET')
-        if OptionNet == 3:
+        if OptionNet == '3':
             return InterfaceOptions.managed('NET')
-        if OptionNet == 4:
+        if OptionNet == '4':
             if mode == 'monitor':
                 return AiroDump.Explorer('NET')
             if mode == 'managed':
                 print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
                 return Menus.NET()
-        if OptionNet == 5:
+        if OptionNet == '5':
             return Menus.DOS()
-        if OptionNet == 6:
+        if OptionNet == '6':
             return Menus.HANDSHAKE()
-        if OptionNet == 7:
+        if OptionNet == '7':
             return Menus.OFFLINE_DECRYPT_WPA()
-        if OptionNet == 8:
+        if OptionNet == '8':
             pass
-        if OptionNet == 9:
+        if OptionNet == '9':
             return NMAPScan.menu()
+        if OptionNet == '':
+            return Menus.NET()
+        else:
+            print(f'Please use only numbers between {O}0{W} and{O} 9{W}')
+            input(f'Press {O}ENTER{W} to continue')
+            return Menus.NET()
 
     #WEB MENU
     def WEB():
@@ -275,14 +283,20 @@ class Menus():
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
 
-        OptionWeb = int(input())
+        OptionWeb = str(input())
 
-        if OptionWeb == 0:
+        if OptionWeb == '0':
             return Menus.StartMenu()
-        if OptionWeb == 1:
+        if OptionWeb == '1':
             return WEBAM.FWC()
-        if OptionWeb == 2:
+        if OptionWeb == '2':
             pass
+        if OptionWeb == '':
+            return Menus.WEB()
+        else:
+            print(f'Please use only numbers between {O}0{W} and{O} 2{W}')
+            input(f'Press {O}ENTER{W} to continue')
+            return Menus.StartMenu()
 
     #DOS MENU
     def DOS():
@@ -316,52 +330,51 @@ class Menus():
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
 
-        DosOption = int(input())
+        DosOption = str(input())
 
-        if DosOption == 0:
+        if DosOption == '0':
             return Menus.NET()
-        if DosOption == 1:
+        if DosOption == '1':
             return InterfaceOptions.InterfaceSelect('DOS')
-        if DosOption == 2:
+        if DosOption == '2':
             return InterfaceOptions.monitor('DOS')
-        if DosOption == 3:
+        if DosOption == '3':
             return InterfaceOptions.managed('DOS')
-        if DosOption == 4:
+        if DosOption == '4':
             if mode == 'monitor':
                 return AiroDump.Explorer('DOS')
             if mode == 'managed':
                 print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
                 return Menus.DOS()
-        if DosOption == 5:
+        if DosOption == '5':
             if mode == 'monitor':
                 return Attacks.MDK3()
             if mode == 'managed':
                 print(f'{Danger} Please put your card in{O} monitor {W}mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
-                return DOS(interface)
-        if DosOption == 6:
+                return Menus.DOS()
+        if DosOption == '6':
             if mode == 'monitor':
                 return Attacks.Aireplay()
             if mode == 'managed':
                 print(f'{Danger} Please put your card in{O} monitor {W}mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
-                return DOS(interface)
-        if DosOption == 7:
+                return Menus.DOS()
+        if DosOption == '7':
             if mode == 'monitor':
                 return Attacks.Confusion()
             if mode == 'managed':
                 print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
-                return DOS()
+                return Menus.DOS()
         else:
             print(f'{Danger} Please only use numbers between {O}0{W} and{O} 7{W}')
             input(f'{Danger} Click {O}ENTER{W} to continue')
-            return DOS()
+            return Menus.DOS()
 
     #HANDSHAKE MENU
     def HANDSHAKE():
-
 
         Dir = "Data/HandShakes"
         ListDir = os.listdir(Dir)
@@ -400,37 +413,43 @@ class Menus():
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
 
-        HandOption = int(input())
+        HandOption = str(input())
 
-        if HandOption == 0:
+        if HandOption == '0':
             return Menus.NET()
-        if HandOption == 1:
+        if HandOption == '1':
             return InterfaceOptions.InterfaceSelect('HANDSHAKE')
-        if HandOption == 2:
+        if HandOption == '2':
             return InterfaceOptions.monitor('HANDSHAKE')
-        if HandOption == 3:
+        if HandOption == '3':
             return InterfaceOptions.managed('HANDSHAKE')
-        if HandOption == 4:
+        if HandOption == '4':
             if mode == 'monitor':
                 return AiroDump.Explorer('HANDSHAKE')
             if mode == 'managed':
                 print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
                 return Menus.HANDSHAKE()
-        if HandOption == 5:
+        if HandOption == '5':
             if mode == 'monitor':
                 return Attacks.HandShake('MDK3')
             if mode == 'managed':
                 print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
                 return Menus.HANDSHAKE()
-        if HandOption == 6:
+        if HandOption == '6':
             if mode == 'monitor':
                 return Attacks.HandShake('Aireplay')
             if mode == 'managed':
                 print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
                 return Menus.HANDSHAKE()
+        if HandOption == '':
+            return Menus.HANDSHAKE()
+        else:
+            print(f'Please use only numbers between {O}0{W} and{O} 6{W}')
+            input(f'Press {O}ENTER{W} to continue')
+            return Menus.HANDSHAKE()
 
     #OFFLINE_DECRYPT MENU
     def OFFLINE_DECRYPT():
@@ -445,12 +464,18 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
-        offlineOption = int(input())
+        offlineOption = str(input())
 
-        if offlineOption == 0:
+        if offlineOption == '0':
             return Menus.StartMenu()
-        if offlineOption == 1:
+        if offlineOption == '1':
             return Menus.OFFLINE_DECRYPT_WPA()
+        if offlineOption == '':
+            return Menus.OFFLINE_DECRYPT2()
+        else:
+            print(f'Please use only numbers between {O}1{W} and{O} 1{W}')
+            input(f'Press {O}ENTER{W} to continue')
+            return Menus.OFFLINE_DECRYPT()
 
     #OFFLINE_DECRYPT_WPA MENU
     def OFFLINE_DECRYPT_WPA():
@@ -472,20 +497,26 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'{P}Contribution:{W} If you know how we can automate the .cap to .hccapx process plz let us know!')
         print(f'{C}----------{W}')
-        offlineOption = int(input())
+        offlineOption = str(input())
 
-        if offlineOption == 0:
+        if offlineOption == '0':
             return Menus.StartMenu()
-        if offlineOption == 1:
+        if offlineOption == '1':
             return Bruteforce.DicAircrack()
-        if offlineOption == 2:
+        if offlineOption == '2':
             return Bruteforce.BruteAircrack()
-        if offlineOption == 3:
+        if offlineOption == '3':
             return Bruteforce.DicHashcat()
-        if offlineOption == 4:
+        if offlineOption == '4':
             return Bruteforce.BruteHashcat()
-        if offlineOption == 5:
+        if offlineOption == '5':
             return Bruteforce.RuleHashcat()
+        if offlineOption == '':
+            return Menus.OFFLINE_DECRYPT_WPA()
+        else:
+            print(f'Please use only numbers between {O}1{W} and{O} 5{W}')
+            input(f'Press {O}ENTER{W} to continue')
+            return Menus.OFFLINE_DECRYPT_WPA()
 
 #Class for Web Attack
 class WEBAM():
