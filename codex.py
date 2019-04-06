@@ -255,7 +255,7 @@ class Menus():
         if OptionNet == '6':
             return Menus.HANDSHAKE()
         if OptionNet == '7':
-            return Menus.OFFLINE_DECRYPT_WPA()
+            return Menus.OFFLINE_DECRYPT_WPA('NET')
         if OptionNet == '8':
             pass
         if OptionNet == '9':
@@ -471,7 +471,7 @@ class Menus():
         if offlineOption == '0':
             return Menus.StartMenu()
         if offlineOption == '1':
-            return Menus.OFFLINE_DECRYPT_WPA()
+            return Menus.OFFLINE_DECRYPT_WPA('OFF')
         if offlineOption == '':
             return Menus.OFFLINE_DECRYPT()
         else:
@@ -480,7 +480,7 @@ class Menus():
             return Menus.OFFLINE_DECRYPT()
 
     #OFFLINE_DECRYPT_WPA MENU
-    def OFFLINE_DECRYPT_WPA():
+    def OFFLINE_DECRYPT_WPA(Menu):
 
         OS()
         print()
@@ -502,7 +502,12 @@ class Menus():
         offlineOption = str(input())
 
         if offlineOption == '0':
-            return Menus.StartMenu()
+            if Menu == 'OFF':
+                return Menus.OFFLINE_DECRYPT()
+            if Menu == 'NET':
+                return Menus.NET()
+            else:
+                return Menus.NET()
         if offlineOption == '1':
             return Bruteforce.DicAircrack()
         if offlineOption == '2':
