@@ -218,7 +218,7 @@ class Menus():
         print('5) DoS Attack menu')
         print('6) HandShake Tools menu')
         print('7) WPA/WPA2 decrypt menu')
-        print('8) Evil twin attack menu')
+        print(f'8) Evil twin attack menu {O}[WORK IN PROGRESS]{W}')
         print('9) NMAP menu')
         print('')
         print(f'{C}----------{W}')
