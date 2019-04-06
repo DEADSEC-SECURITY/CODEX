@@ -14,7 +14,7 @@ Banner = '''     __       ______   ______    _______   __________   ___     __
 
 Dead = f'''
               		By         : DeAdSeC
-              		Version    : 1.0.1
+              		Version    : 2.1.5
               		GitHub     : CODEX
               		Discord    : DISC
               		'''
