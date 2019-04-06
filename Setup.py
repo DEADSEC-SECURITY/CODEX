@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.1.3---#
+#---Version 2.1.5---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -34,4 +34,6 @@ else:
     os.system('sudo apt-get install hashcat')
     print(f'{Plus}{G} Installing WHOIS ...{W}')
     os.system('sudo apt-get install whois')
+    print(f'{Plus}{G} Installing CRUNCH ...')
+    os.system('sudo apt-get install crunch')
     print(f'{C}INSTALLATION FINISHED YOU CAN NOW LAUNCH CODEX')
