@@ -754,6 +754,7 @@ class AiroDump():
         global channel
         global essid
         global encrypt
+        global bssid
 
         FileNameCSV = f'{FileName}-01.csv'
         CS = pandas.read_csv(f'{Directory}{FileNameCSV}')
