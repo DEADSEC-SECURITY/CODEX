@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.1.5---#
+#---Version 2.1.6---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -546,6 +546,7 @@ class InterfaceOptions():
     def InterfaceSelect(Menu):
 
         global interface
+        global mode
 
         #Netifaces
         NetworkInterfaces = netifaces.interfaces()
@@ -564,16 +565,44 @@ class InterfaceOptions():
         print(f'{C}----------{W}')
         print()
         interface = input('Please write the interface you want to use: ')
-        if Menu == 'StartMenu':
-            return Menus.StartMenu()
-        if Menu == 'NET':
-            return Menus.NET()
-        if Menu == 'DOS':
-            return Menus.DOS()
-        if Menu == 'HANDSHAKE':
-            return Menus.HANDSHAKE()
+
+        process = subprocess.Popen(['cat', f'/sys/class/net/{interface}/carrier'], stdout = subprocess.PIPE)
+        text = str(process.communicate()[0])
+        CleanText = text[2:-3]
+
+        if CleanText == '1':
+            interface = interface
+            mode = 'managed'
+            if Menu == 'StartMenu':
+                return Menus.StartMenu()
+            if Menu == 'NET':
+                return Menus.NET()
+            if Menu == 'DOS':
+                return Menus.DOS()
+            if Menu == 'HANDSHAKE':
+                return Menus.HANDSHAKE()
+            else:
+                return Menus.StartMenu()
+
+        if CleanText != '1':
+            interface = interface + 'mon'
+            mode = 'monitor'
+            if Menu == 'StartMenu':
+                return Menus.StartMenu()
+            if Menu == 'NET':
+                return Menus.NET()
+            if Menu == 'DOS':
+                return Menus.DOS()
+            if Menu == 'HANDSHAKE':
+                return Menus.HANDSHAKE()
+            else:
+                return Menus.StartMenu()
+
         else:
-            return Menus.StartMenu()
+            OS()
+            print(f'Problem loading interface please check line 602')
+            input(f'Press {O}ENTER{W} to continue')
+            sys.exit()
 
     def monitor(Menu):
 
