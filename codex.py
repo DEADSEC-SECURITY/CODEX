@@ -103,28 +103,38 @@ class Verify():
                 print(f'{B}********** Please select your default interface **********{W}')
                 print(*(W + '{}) {}'.format(x, y) for (x, y) in enumerate(NetworkInterfaces, 1)), sep='\n')
                 print()
-                print(f'{C}----------')
-                print(f'{G}Note: You can change the interface later if you need!')
-                print(f'{C}----------')
-                print(f'{P}Contribution: We are looking for a way to make it so you dont need to write the hole interface name and only a number!')
+                print(f'{C}----------{W}')
+                print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
                 print(f'{C}----------{W}')
                 print()
-                interface = input('Please write your new default interface: ')
+                IntefaceNumber = int(input('Please select an interface: '))
 
-                with open('Data/DATA.json') as f:
-                    data = json.load(f)
+                NTCount = len(NetworkInterfaces)
 
-                data['DefaultInfo'][0]['defaultinterface'] = interface
-                with open('Data/DATA.json', 'w') as f:
-                    json.dump(data, f, indent = 2)
+                if IntefaceNumber > NTCount:
+                    print(f'Please use only numbers between {O}1{W} and{O} {NTCount}{W}')
+                    input(f'Press {O}ENTER{W} to continue')
+                    return InterfaceOptions.InterfaceSelect(Menu)
 
-                print(f"Interface changed to {O}{interface}{W}")
-                input(f'Press {O}ENTER{W} to continue')
+                else:
+                    After = IntefaceNumber - 1
+                    interface = str(NetworkInterfaces[After:IntefaceNumber])
+                    inte = interface[2:-2]
+                    #--------------------#
 
-                return Verify.CheckInterfaceState()
+                    with open('Data/DATA.json') as f:
+                        data = json.load(f)
+
+                    data['DefaultInfo'][0]['defaultinterface'] = inte
+                    with open('Data/DATA.json', 'w') as f:
+                        json.dump(data, f, indent = 2)
+
+                    print(f"Interface changed to {O}{inte}{W}")
+                    input(f'Press {O}ENTER{W} to continue')
+                    interface = inte
+                    return Verify.CheckInterfaceState()
             else:
                 return Verify.CheckInterfaceState()
-
 #Class with all the menus
 class Menus():
 
@@ -558,51 +568,61 @@ class InterfaceOptions():
         print(f'{B}********** Please select an interface **********')
         print(*(W + '{}) {}'.format(x, y) for (x, y) in enumerate(NetworkInterfaces, 1)), sep='\n')
         print()
-        print(f'{C}----------')
-        print(f'{G}Note: {W}Please write the interface the way it shows in the menu!')
-        print(f'{C}----------')
-        print(f'{P}Contribution: {W}We are looking for a way to make it so you dont need to write the hole interface name and only a number!')
+        print(f'{C}----------{W}')
+        print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
         print()
-        interface = input('Please write the interface you want to use: ')
+        IntefaceNumber = int(input('Please select an interface: '))
 
-        process = subprocess.Popen(['cat', f'/sys/class/net/{interface}/carrier'], stdout = subprocess.PIPE)
-        text = str(process.communicate()[0])
-        CleanText = text[2:-3]
+        NTCount = len(NetworkInterfaces)
 
-        if CleanText == '1':
-            interface = interface
-            mode = 'managed'
-            if Menu == 'StartMenu':
-                return Menus.StartMenu()
-            if Menu == 'NET':
-                return Menus.NET()
-            if Menu == 'DOS':
-                return Menus.DOS()
-            if Menu == 'HANDSHAKE':
-                return Menus.HANDSHAKE()
-            else:
-                return Menus.StartMenu()
-
-        if CleanText != '1':
-            interface = interface + 'mon'
-            mode = 'monitor'
-            if Menu == 'StartMenu':
-                return Menus.StartMenu()
-            if Menu == 'NET':
-                return Menus.NET()
-            if Menu == 'DOS':
-                return Menus.DOS()
-            if Menu == 'HANDSHAKE':
-                return Menus.HANDSHAKE()
-            else:
-                return Menus.StartMenu()
+        if IntefaceNumber > NTCount:
+            print(f'Please use only numbers between {O}1{W} and{O} {NTCount}{W}')
+            input(f'Press {O}ENTER{W} to continue')
+            return InterfaceOptions.InterfaceSelect(Menu)
 
         else:
-            OS()
-            print(f'Problem loading interface please check line 602')
-            input(f'Press {O}ENTER{W} to continue')
-            sys.exit()
+            After = IntefaceNumber - 1
+            interface = str(NetworkInterfaces[After:IntefaceNumber])
+            inte = interface[2:-2]
+            #--------------------#
+            process = subprocess.Popen(['cat', f'/sys/class/net/{inte}/carrier'], stdout = subprocess.PIPE)
+            text = str(process.communicate()[0])
+            CleanText = text[2:-3]
+
+            if CleanText == '1':
+                interface = inte
+                mode = 'managed'
+                if Menu == 'StartMenu':
+                    return Menus.StartMenu()
+                if Menu == 'NET':
+                    return Menus.NET()
+                if Menu == 'DOS':
+                    return Menus.DOS()
+                if Menu == 'HANDSHAKE':
+                    return Menus.HANDSHAKE()
+                else:
+                    return Menus.StartMenu()
+
+            if CleanText != '1':
+                interface = inte + 'mon'
+                mode = 'monitor'
+                if Menu == 'StartMenu':
+                    return Menus.StartMenu()
+                if Menu == 'NET':
+                    return Menus.NET()
+                if Menu == 'DOS':
+                    return Menus.DOS()
+                if Menu == 'HANDSHAKE':
+                    return Menus.HANDSHAKE()
+                else:
+                    return Menus.StartMenu()
+
+            else:
+                OS()
+                print(f'Problem loading interface please check line 543')
+                input(f'Press {O}ENTER{W} to continue')
+                sys.exit()
 
     def monitor(Menu):
 
@@ -1686,31 +1706,39 @@ class Defaults():
         #Netifaces
         NetworkInterfaces = netifaces.interfaces()
 
-        with open('Data/DATA.json') as f:
-            data = json.load(f)
-
-        for DefaultInfo in data['DefaultInfo']:
-            interface = DefaultInfo['defaultinterface']
-
         OS()
         print(f'{B}********** Please select your default interface **********{W}')
         print(*(W + '{}) {}'.format(x, y) for (x, y) in enumerate(NetworkInterfaces, 1)), sep='\n')
         print()
-        print(f'{C}----------')
-        print(f'{G}Note: You can change the interface later if you need!')
-        print(f'{C}----------')
-        print(f'{P}Contribution: We are looking for a way to make it so you dont need to write the hole interface name and only a number!')
+        print(f'{C}----------{W}')
+        print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
         print()
-        interface = input('Please write your new default interface: ')
+        IntefaceNumber = int(input('Please select an interface: '))
 
-        data['DefaultInfo'][0]['defaultinterface'] = interface
-        with open('Data/DATA.json', 'w') as f:
-            json.dump(data, f, indent = 2)
+        NTCount = len(NetworkInterfaces)
 
-        print(f"Interface changed to {O}{interface}{W}")
-        input(f'Press {O}ENTER{W} to continue')
+        if IntefaceNumber > NTCount:
+            print(f'Please use only numbers between {O}1{W} and{O} {NTCount}{W}')
+            input(f'Press {O}ENTER{W} to continue')
+            return InterfaceOptions.InterfaceSelect(Menu)
 
-        return Verify.CheckInterfaceState()
+        else:
+            After = IntefaceNumber - 1
+            interface = str(NetworkInterfaces[After:IntefaceNumber])
+            inte = interface[2:-2]
+            #--------------------#
+
+            with open('Data/DATA.json') as f:
+                data = json.load(f)
+
+            data['DefaultInfo'][0]['defaultinterface'] = inte
+            with open('Data/DATA.json', 'w') as f:
+                json.dump(data, f, indent = 2)
+
+            print(f"Interface changed to {O}{inte}{W}")
+            input(f'Press {O}ENTER{W} to continue')
+            interface = inte
+            return Verify.CheckInterfaceState()
 
 Verify.CheckAdminPrivs()
