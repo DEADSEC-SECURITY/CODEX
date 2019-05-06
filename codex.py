@@ -135,6 +135,7 @@ class Verify():
                     return Verify.CheckInterfaceState()
             else:
                 return Verify.CheckInterfaceState()
+                
 #Class with all the menus
 class Menus():
 
