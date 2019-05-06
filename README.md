@@ -1,11 +1,3 @@
-**SCRIPT SCREENSHOTS**
-
-  //MAIN MENU\\
-  ![alt text](https://github.com/DEADSEC-SECURITY/CODEX/blob/master/utils/IMG/main1.png)
-
-  //NET MENU\\
-  ![alt text](https://github.com/DEADSEC-SECURITY/CODEX/blob/master/utils/IMG/net1.png)
-
 **DONATIONS**
 
 If you enjoyed the script and found it useful, you can support the project making a donation. Sending a fraction of any of these cryptocurrencies. Any amount, not matter how small (1, 2, 5 $/€) is welcome.
@@ -41,3 +33,13 @@ Console commands:
 $ sudo python3 Setup.py
 
 $ sudo python3 codex.py
+
+**SCRIPT SCREENSHOTS**
+
+  *MAIN MENU*
+  
+  ![alt text](https://github.com/DEADSEC-SECURITY/CODEX/blob/master/utils/IMG/main1.png)
+
+  *NET MENU*
+  
+  ![alt text](https://github.com/DEADSEC-SECURITY/CODEX/blob/master/utils/IMG/net1.png)
