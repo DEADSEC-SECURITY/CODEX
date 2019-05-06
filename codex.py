@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.1.7---#
+#---Version 2.1.8---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -473,6 +473,9 @@ class Menus():
         print(f'{B}************ Decrypt Menu ************{W}')
         print('0) Return to main menu')
         print('1) WPA/WPA2 decrypt menu')
+        print(f'{C}----------{W}')
+        print(f'2) Dictionary attack against capture file {P}[MD5] {O}[HashCat]{W}')
+        print(f'3) Bruteforce attack against capture file {P}[MD5] {O}[HashCat]{W}')
         print('')
         print(f'{C}----------{W}')
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
@@ -483,6 +486,10 @@ class Menus():
             return Menus.StartMenu()
         if offlineOption == '1':
             return Menus.OFFLINE_DECRYPT_WPA('OFF')
+        if offlineOption == '2':
+            return Bruteforce.DicMD5()
+        if offlineOption == '3':
+            return Bruteforce.BruteMD5()
         if offlineOption == '':
             return Menus.OFFLINE_DECRYPT()
         else:
@@ -874,8 +881,23 @@ class Bruteforce():
         handshakePath = str(input())
         print('Please enter full path for your wordlist: ')
         wordlistPath = str(input())
-        HSPVerify = os.path.isfile(f'{handshakePath}')
-        WLPVerify = os.path.isfile(f'{wordlistPath}')
+        CheckAspas = handshakePath[:1]
+        CheckAspasWP = wordlistPath[:1]
+        if CheckAspas == "'":
+            handshakePathNo = handshakePath[1:-2]
+            HSPVerify = os.path.isfile(f'{handshakePathNo}')
+            if CheckAspasWP == "'":
+                wordlistPathNo = wordlistPath[1:-2]
+                WLPVerify = os.path.isfile(f'{wordlistPathNo}')
+            else:
+                WLPVerify = os.path.isfile(f'{wordlistPath}')
+        else:
+            HSPVerify = os.path.isfile(f'{handshakePath}')
+            if CheckAspasWP == "'":
+                wordlistPathNo = wordlistPath[1:-2]
+                WLPVerify = os.path.isfile(f'{wordlistPathNo}')
+            else:
+                WLPVerify = os.path.isfile(f'{wordlistPath}')
         print(f'{O}Checking paths ...{W}')
         time.sleep(1)
         if HSPVerify == True:
@@ -903,7 +925,12 @@ class Bruteforce():
         MaxPassLength = str(input())
         print(f'Please enter the network name {O}[If the network name has spaces write it like this "Example\ Password "]{W}:')
         NetWorkName = str(input())
-        HSPVerify = os.path.isfile(f'{handshakePath}')
+        CheckAspas = handshakePath[:1]
+        if CheckAspas == "'":
+            handshakePathNo = handshakePath[1:-2]
+            HSPVerify = os.path.isfile(f'{handshakePathNo}')
+        else:
+            HSPVerify = os.path.isfile(f'{handshakePath}')
         print(f'{O}Checking paths ...{W}')
         time.sleep(1)
         if HSPVerify == True:
@@ -925,6 +952,23 @@ class Bruteforce():
         wordlistPath = str(input())
         HSPVerify = os.path.isfile(f'{handshakePath}')
         WLPVerify = os.path.isfile(f'{wordlistPath}')
+        CheckAspas = handshakePath[:1]
+        CheckAspasWP = wordlistPath[:1]
+        if CheckAspas == "'":
+            handshakePathNo = handshakePath[1:-2]
+            HSPVerify = os.path.isfile(f'{handshakePathNo}')
+            if CheckAspasWP == "'":
+                wordlistPathNo = wordlistPath[1:-2]
+                WLPVerify = os.path.isfile(f'{wordlistPathNo}')
+            else:
+                WLPVerify = os.path.isfile(f'{wordlistPath}')
+        else:
+            HSPVerify = os.path.isfile(f'{handshakePath}')
+            if CheckAspasWP == "'":
+                wordlistPathNo = wordlistPath[1:-2]
+                WLPVerify = os.path.isfile(f'{wordlistPathNo}')
+            else:
+                WLPVerify = os.path.isfile(f'{wordlistPath}')
         print(f'{O}Checking paths ...{W}')
         time.sleep(1)
         if HSPVerify == True:
@@ -958,7 +1002,12 @@ class Bruteforce():
         MinPassLength = str(input())
         print('Please enter max password length: ')
         MaxPassLength = str(input())
-        HSPVerify = os.path.isfile(f'{handshakePath}')
+        CheckAspas = handshakePath[:1]
+        if CheckAspas == "'":
+            handshakePathNo = handshakePath[1:-2]
+            HSPVerify = os.path.isfile(f'{handshakePathNo}')
+        else:
+            HSPVerify = os.path.isfile(f'{handshakePath}')
         print(f'{O}Checking paths ...{W}')
         time.sleep(1)
         if HSPVerify == True:
@@ -991,6 +1040,29 @@ class Bruteforce():
         HSPVerify = os.path.isfile(f'{handshakePath}')
         WLPVerify = os.path.isfile(f'{wordlistPath}')
         RPVerify = os.path.isfile(f'{rulePath}')
+        CheckAspas = handshakePath[:1]
+        CheckAspasWP = wordlistPath[:1]
+        CheckAspasRP rulePath[:1]
+        if CheckAspas == "'":
+            handshakePathNo = handshakePath[1:-2]
+            HSPVerify = os.path.isfile(f'{handshakePathNo}')
+            if CheckAspasWP == "'":
+                wordlistPathNo = wordlistPath[1:-2]
+                WLPVerify = os.path.isfile(f'{wordlistPathNo}')
+                if CheckAspasRP == "'":
+                    rulePathNo = rulePath[1:-2]
+                    RPVerify = os.path.isfile(f'{rulePathNo}')
+                else:
+                    RPVerify = os.path.isfile(f'{rulePath}')
+            else:
+                WLPVerify = os.path.isfile(f'{wordlistPath}')
+        else:
+            HSPVerify = os.path.isfile(f'{handshakePath}')
+            if CheckAspasWP == "'":
+                wordlistPathNo = wordlistPath[1:-2]
+                WLPVerify = os.path.isfile(f'{wordlistPathNo}')
+            else:
+                WLPVerify = os.path.isfile(f'{wordlistPath}')
         print(f'{O}Checking paths ...{W}')
         time.sleep(1)
         if HSPVerify == True:
@@ -1020,6 +1092,68 @@ class Bruteforce():
                 return Menus.OFFLINE_DECRYPT()
         else:
             print(f'{R}HandShake path is wrong please try again!{W}')
+            input(f'Press {O}ENTER{W} to continue')
+            return Menus.OFFLINE_DECRYPT()
+    def DicMD5():
+        print(f'Please enter full path for the MD5 hashes file: ')
+        MD5Path = str(input())
+        print('Please enter full path for your wordlist: ')
+        wordlistPath = str(input())
+        CheckAspas = MD5Path[:1]
+        CheckAspasWP = wordlistPath[:1]
+        if CheckAspas == "'":
+            MD5PathNo = MD5Path[1:-2]
+            MDPVerify = os.path.isfile(f'{MD5PathNo}')
+            if CheckAspasWP == "'":
+                wordlistPathNo = wordlistPath[1:-2]
+                WLPVerify = os.path.isfile(f'{wordlistPathNo}')
+            else:
+                WLPVerify = os.path.isfile(f'{wordlistPath}')
+        else:
+            MDPVerify = os.path.isfile(f'{MD5Path}')
+            if CheckAspasWP == "'":
+                wordlistPathNo = wordlistPath[1:-2]
+                WLPVerify = os.path.isfile(f'{wordlistPathNo}')
+            else:
+                WLPVerify = os.path.isfile(f'{wordlistPath}')
+        print(f'{O}Checking paths ...{W}')
+        time.sleep(1)
+        if MDPVerify == True:
+            if WLPVerify == True:
+                print(f'Starting dictionary attack ... {O}[CTRL-C to exit]{W}')
+                time.sleep(2)
+                os.system(f'sudo hashcat –a 0 {MD5Path} {wordlistPath} --force')
+                print(f'{R}Dictionary attack finished ...{W}')
+                input(f'Press {O}ENTER{W} to continue')
+                return Menus.OFFLINE_DECRYPT()
+            else:
+                print(f"{R}WordList path isn't correct!{W}")
+                input(f'Press {O}ENTER{W} to continue')
+                return Menus.OFFLINE_DECRYPT()
+        else:
+            print(f"{R}Hash file path isn't correct!{W}")
+            input(f'Press {O}ENTER{W} to continue')
+            return Menus.OFFLINE_DECRYPT()
+    def BruteMD5():
+        print(f'Please enter full path for the MD5 hashes file: ')
+        MD5Path = str(input())
+        CheckAspas = MD5Path[:1]
+        if CheckAspas == "'":
+            MD5PathNo = MD5Path[1:-2]
+            MDPVerify = os.path.isfile(f'{MD5PathNo}')
+        else:
+            MDPVerify = os.path.isfile(f'{MD5Path}')
+        print(f'{O}Checking paths ...{W}')
+        time.sleep(1)
+        if MDPVerify == True:
+            print(f'Starting bruteforce attack ... {O}[CTRL-C to exit]{W}')
+            time.sleep(2)
+            os.system(f'sudo hashcat -a 3 {MD5Path} --force')
+            print(f'{R}Bruteforce attack finished ...{W}')
+            input(f'Press {O}ENTER{W} to continue')
+            return Menus.OFFLINE_DECRYPT()
+        else:
+            print(f"{R}Hash file path isn't correct!{W}")
             input(f'Press {O}ENTER{W} to continue')
             return Menus.OFFLINE_DECRYPT()
 
