@@ -33,3 +33,13 @@ Console commands:
 $ sudo python3 Setup.py
 
 $ sudo python3 codex.py
+
+**SCRIPT SCREENSHOTS**
+
+  *MAIN MENU*
+  
+  ![alt text](https://github.com/DEADSEC-SECURITY/CODEX/blob/master/utils/IMG/main1.png)
+
+  *NET MENU*
+  
+  ![alt text](https://github.com/DEADSEC-SECURITY/CODEX/blob/master/utils/IMG/net1.png)
