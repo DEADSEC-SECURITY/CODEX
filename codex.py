@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.1.6---#
+#---Version 2.1.7---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -135,7 +135,7 @@ class Verify():
                     return Verify.CheckInterfaceState()
             else:
                 return Verify.CheckInterfaceState()
-                
+
 #Class with all the menus
 class Menus():
 
