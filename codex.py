@@ -1042,7 +1042,7 @@ class Bruteforce():
         RPVerify = os.path.isfile(f'{rulePath}')
         CheckAspas = handshakePath[:1]
         CheckAspasWP = wordlistPath[:1]
-        CheckAspasRP rulePath[:1]
+        CheckAspasRP = rulePath[:1]
         if CheckAspas == "'":
             handshakePathNo = handshakePath[1:-2]
             HSPVerify = os.path.isfile(f'{handshakePathNo}')
