@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.1.8---#
+#---Version 2.1.9---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -15,6 +15,7 @@ import time
 import pandas
 import nmap
 import netifaces
+import random
 #IMPORT UTILS
 from utils.colors import *
 from utils.ExtraVariables import *
@@ -27,6 +28,8 @@ FileName = 'AiroDumpOutPut' #You can edit this variable
 Directory = 'Data/Aircrack-ng/' #You can edit this variable
 #NMAP
 nm = nmap.PortScanner()
+#RANDOM
+RR = random.randint(0, 100000)
 
 #OS to clean the screen
 def OS():
@@ -476,6 +479,9 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'2) Dictionary attack against capture file {P}[MD5] {O}[HashCat]{W}')
         print(f'3) Bruteforce attack against capture file {P}[MD5] {O}[HashCat]{W}')
+        print(f'{C}----------{W}')
+        print(f'4) Dictionary attack against capture file {P}[SHA256] {O}[HashCat]{W}')
+        print(f'5) Bruteforce attack against capture file {P}[SHA256] {O}[HashCat]{W}')
         print('')
         print(f'{C}----------{W}')
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
@@ -490,6 +496,10 @@ class Menus():
             return Bruteforce.DicMD5()
         if offlineOption == '3':
             return Bruteforce.BruteMD5()
+        if offlineOption == '4':
+            return Bruteforce.DicSHA256()
+        if offlineOption == '5':
+            return Bruteforce.BruteSHA256()
         if offlineOption == '':
             return Menus.OFFLINE_DECRYPT()
         else:
@@ -1122,8 +1132,9 @@ class Bruteforce():
             if WLPVerify == True:
                 print(f'Starting dictionary attack ... {O}[CTRL-C to exit]{W}')
                 time.sleep(2)
-                os.system(f'sudo hashcat –a 0 {MD5Path} {wordlistPath} --force')
+                os.system(f'sudo hashcat -m 0 -a 0 -o Data/FoundHashes/MD5-{RR}.txt --remove {MD5Path} {wordlistPath} --force')
                 print(f'{R}Dictionary attack finished ...{W}')
+                print(f'{R}Cracked hashes saved to {O}Data/FoundHashes{W} file{W}')
                 input(f'Press {O}ENTER{W} to continue')
                 return Menus.OFFLINE_DECRYPT()
             else:
@@ -1149,7 +1160,73 @@ class Bruteforce():
             print(f'Starting bruteforce attack ... {O}[CTRL-C to exit]{W}')
             time.sleep(2)
             os.system(f'sudo hashcat -a 3 {MD5Path} --force')
+            os.system(f'sudo hashcat -m 0 -a 3 -o Data/FoundHashes/MD5-{RR}.txt --remove {MD5Path} {wordlistPath} --force')
             print(f'{R}Bruteforce attack finished ...{W}')
+            print(f'{R}Cracked hashes saved to {O}Data/FoundHashes{W} file{W}')
+            input(f'Press {O}ENTER{W} to continue')
+            return Menus.OFFLINE_DECRYPT()
+        else:
+            print(f"{R}Hash file path isn't correct!{W}")
+            input(f'Press {O}ENTER{W} to continue')
+            return Menus.OFFLINE_DECRYPT()
+    def DicSHA256():
+        print(f'Please enter full path for the SHA256 hashes file: ')
+        SHA256Path = str(input())
+        print('Please enter full path for your wordlist: ')
+        wordlistPath = str(input())
+        CheckAspas = SHA256Path[:1]
+        CheckAspasWP = wordlistPath[:1]
+        if CheckAspas == "'":
+            SHA256PathNo = SHA256Path[1:-2]
+            MDPVerify = os.path.isfile(f'{SHA256PathNo}')
+            if CheckAspasWP == "'":
+                wordlistPathNo = wordlistPath[1:-2]
+                WLPVerify = os.path.isfile(f'{wordlistPathNo}')
+            else:
+                WLPVerify = os.path.isfile(f'{wordlistPath}')
+        else:
+            MDPVerify = os.path.isfile(f'{SHA256Path}')
+            if CheckAspasWP == "'":
+                wordlistPathNo = wordlistPath[1:-2]
+                WLPVerify = os.path.isfile(f'{wordlistPathNo}')
+            else:
+                WLPVerify = os.path.isfile(f'{wordlistPath}')
+        print(f'{O}Checking paths ...{W}')
+        time.sleep(1)
+        if MDPVerify == True:
+            if WLPVerify == True:
+                print(f'Starting dictionary attack ... {O}[CTRL-C to exit]{W}')
+                time.sleep(2)
+                os.system(f'sudo hashcat -m 1800 -a 0 -o Data/FoundHashes/SHA256-{RR}.txt --remove {SHA256Path} {wordlistPath} --force')
+                print(f'{R}Dictionary attack finished ...{W}')
+                print(f'{R}Cracked hashes saved to {O}Data/FoundHashes{W} file{W}')
+                input(f'Press {O}ENTER{W} to continue')
+                return Menus.OFFLINE_DECRYPT()
+            else:
+                print(f"{R}WordList path isn't correct!{W}")
+                input(f'Press {O}ENTER{W} to continue')
+                return Menus.OFFLINE_DECRYPT()
+        else:
+            print(f"{R}Hash file path isn't correct!{W}")
+            input(f'Press {O}ENTER{W} to continue')
+            return Menus.OFFLINE_DECRYPT()
+    def DicSHA256():
+        print(f'Please enter full path for the SHA256 hashes file: ')
+        SHA256Path = str(input())
+        CheckAspas = SHA256Path[:1]
+        if CheckAspas == "'":
+            SHA256PathNo = SHA256Path[1:-2]
+            MDPVerify = os.path.isfile(f'{SHA256PathNo}')
+        else:
+            MDPVerify = os.path.isfile(f'{SHA256Path}')
+        print(f'{O}Checking paths ...{W}')
+        time.sleep(1)
+        if MDPVerify == True:
+            print(f'Starting bruteforce attack ... {O}[CTRL-C to exit]{W}')
+            time.sleep(2)
+            os.system(f'sudo hashcat -m 1800 -a 3 -o Data/FoundHashes/SHA256-{RR}.txt --remove {SHA256Path} --force')
+            print(f'{R}Dictionary attack finished ...{W}')
+            print(f'{R}Cracked hashes saved to {O}Data/FoundHashes{W} file{W}')
             input(f'Press {O}ENTER{W} to continue')
             return Menus.OFFLINE_DECRYPT()
         else:

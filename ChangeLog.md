@@ -1,3 +1,7 @@
+Version 2.1.9 -----------------------------------------------------
+  - Added SHA-256 Bruteforce and Dictionary attack
+  - Fixed MD5 Dictionary attack
+
 Version 2.1.8 -----------------------------------------------------
   - Added MD5 Brutforce and Dictionary attack
   - Fixed some bugs
