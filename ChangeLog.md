@@ -1,3 +1,6 @@
+Version 2.2.0 -----------------------------------------------------
+  - Now when hashing you can drag the files to the terminal
+
 Version 2.1.9 -----------------------------------------------------
   - Added SHA-256 Bruteforce and Dictionary attack
   - Fixed MD5 Dictionary attack
