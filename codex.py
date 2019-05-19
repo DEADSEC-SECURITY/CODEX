@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.2.0---#
+#---Version 2.2.1---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -956,6 +956,26 @@ class Bruteforce():
                         return Bruteforce.DicMD5(HPath, WLPath)
                     if Attack == 'DS':
                         return Bruteforce.DicSHA256(HPath, WLPath)
+    def WrongWordListDirectoryWPA():
+        print('WordList path is wrong please try again!')
+        input(f'Press {O}ENTER{W} to continue')
+        return Menus.OFFLINE_DECRYPT_WPA()
+    def WrongHandShakeDirectory():
+        print('HandShake path is wrong please try again!')
+        input(f'Press {O}ENTER{W} to continue')
+        return Menus.OFFLINE_DECRYPT_WPA()
+    def WrongWordListDirectoryHash():
+        print(f"{R}WordList file path isn't correct!{W}")
+        input(f'Press {O}ENTER{W} to continue')
+        return Menus.OFFLINE_DECRYPT()
+    def WrongHashDirectory():
+        print(f"{R}Hash file path isn't correct!{W}")
+        input(f'Press {O}ENTER{W} to continue')
+        return Menus.OFFLINE_DECRYPT()
+    def HashCatFormatError():
+        print(f'{R}HashCat only supports .hccapx format!{W}')
+        input(f'Press {O}ENTER{W} to continue')
+        return Menus.OFFLINE_DECRYPT()
 
     def DicAircrack(HP, WL):
         if HP == 'NONE' or WL == 'NONE':
@@ -976,13 +996,9 @@ class Bruteforce():
                     input(f'Press {O}ENTER{W} to continue')
                     return Menus.OFFLINE_DECRYPT()
                 else:
-                    print('WordList path is wrong please try again!')
-                    input(f'Press {O}ENTER{W} to continue')
-                    return Menus.OFFLINE_DECRYPT()
+                    return Bruteforce.WrongWordListDirectoryWPA()
             else:
-                print('HandShake path is wrong please try again!')
-                input(f'Press {O}ENTER{W} to continue')
-                return Menus.OFFLINE_DECRYPT()
+                return Bruteforce.WrongHandShakeDirectory()
     def BruteAircrack(HP):
 
         global NetWorkName
@@ -1008,11 +1024,9 @@ class Bruteforce():
                 os.system(f'sudo crunch {MinPassLength} {MaxPassLength} abcdefghijklmnopqrstuvwxyz0123456789 | aircrack-ng -e {NetWorkName} -w - {handshakePath}')
                 print(f'{R}Brutefoce attack finished ...{W}')
                 input(f'Press {O}ENTER{W} to continue')
-                return Menus.OFFLINE_DECRYPT()
+                return Menus.OFFLINE_DECRYPT_WPA()
             else:
-                print('HandShake path is wrong please try again!')
-                input(f'Press {O}ENTER{W} to continue')
-                return Menus.OFFLINE_DECRYPT()
+                return WrongHandShakeDirectory()
     def DicHashcat(HP, WL):
         if HP == 'NONE' or WL == 'NONE':
             print(f'Please enter full path for handshake file {O}[.hccapx]{W}: ')
@@ -1033,17 +1047,11 @@ class Bruteforce():
                         input(f'Press {O}ENTER{W} to continue')
                         return Menus.OFFLINE_DECRYPT()
                     else:
-                        print(f'{R}HashCat only supports .hccapx format!{W}')
-                        input(f'Press {O}ENTER{W} to continue')
-                        return Menus.OFFLINE_DECRYPT()
+                        return Brutforce.HashCatFormatError()
                 else:
-                    print('WordList path is wrong please try again!')
-                    input(f'Press {O}ENTER{W} to continue')
-                    return Menus.OFFLINE_DECRYPT()
+                    return Bruteforce.WrongWordListDirectoryWPA()
             else:
-                print('HandShake path is wrong please try again!')
-                input(f'Press {O}ENTER{W} to continue')
-                return Menus.OFFLINE_DECRYPT()
+                return Bruteforce.WrongHandShakeDirectory()
     def BruteHashcat(HP):
 
         global NetWorkName
@@ -1073,84 +1081,70 @@ class Bruteforce():
                     input(f'Press {O}ENTER{W} to continue')
                     return Menus.OFFLINE_DECRYPT()
                 else:
-                    print(f'{R}HashCat only supports .hccapx format!{W}')
-                    input(f'Press {O}ENTER{W} to continue')
-                    return Menus.OFFLINE_DECRYPT()
+                    return Brutforce.HashCatFormatError()
             else:
-                print('HandShake path is wrong please try again!')
-                input(f'Press {O}ENTER{W} to continue')
-                return Menus.OFFLINE_DECRYPT()
+                return Bruteforce.WrongWordListDirectoryWPA()
     def RuleHashcat(HP, WL):
         if HP == 'NONE' or WL == 'NONE':
-                print(f'Please enter full path for handshake file {O}[.hccapx]{W}: ')
-                HPath = str(input())
-                print('Please enter full path for your wordlist: ')
-                WLPath = str(input())
-                Bruteforce.InputEditor(HPath, WLPath, 'DM')
+            print(f'Please enter full path for handshake file {O}[.hccapx]{W}: ')
+            HPath = str(input())
+            print('Please enter full path for your wordlist: ')
+            WLPath = str(input())
+            Bruteforce.InputEditor(HPath, WLPath, 'DM')
+        else:
+            print('Please enter full path for your rule file: ')
+            rulePath = str(input())
+            CheckAspasRP = rulePath[:1]
+            if CheckAspasRP == "'":
+                rulePathNo = rulePath[1:-2]
+                RPVerify = os.path.isfile(f'{rulePathNo}')
             else:
-                print('Please enter full path for your rule file: ')
-                rulePath = str(input())
-                CheckAspasRP = rulePath[:1]
-                if CheckAspasRP == "'":
-                    rulePathNo = rulePath[1:-2]
-                    RPVerify = os.path.isfile(f'{rulePathNo}')
-                else:
                     RPVerify = os.path.isfile(f'{rulePath}')
-                HSPVerify = os.path.isfile(f'{HP}')
-                WLPVerify = os.path.isfile(f'{WL}')
-                if HSPVerify == True:
-                    if WLPVerify == True:
-                        if HSPFormat == '.hccapx':
-                            if RPVerify == True:
-                                print(f'Starting rule attack ... {O}[CTRL-C to exit]{W}')
-                                time.sleep(2)
-                                os.system(f'sudo hashcat  -m 2500 -r {rulePath} {HP} {WL} --force')
-                                print(f'{R}Dictionary attack finished ...{W}')
-                                input(f'Press {O}ENTER{W} to continue')
-                                return Menus.OFFLINE_DECRYPT()
-                            else:
-                                print('Rule path is wrong please try again!')
-                                input(f'Press {O}ENTER{W} to continue')
-                                return Menus.OFFLINE_DECRYPT()
+            HSPVerify = os.path.isfile(f'{HP}')
+            WLPVerify = os.path.isfile(f'{WL}')
+            if HSPVerify == True:
+                if WLPVerify == True:
+                    if HSPFormat == '.hccapx':
+                        if RPVerify == True:
+                            print(f'Starting rule attack ... {O}[CTRL-C to exit]{W}')
+                            time.sleep(2)
+                            os.system(f'sudo hashcat  -m 2500 -r {rulePath} {HP} {WL} --force')
+                            print(f'{R}Dictionary attack finished ...{W}')
+                            input(f'Press {O}ENTER{W} to continue')
+                            return Menus.OFFLINE_DECRYPT()
                         else:
-                            print(f'{R}HashCat only supports .hccapx format!{W}')
+                            print('Rule path is wrong please try again!')
                             input(f'Press {O}ENTER{W} to continue')
                             return Menus.OFFLINE_DECRYPT()
                     else:
-                        print(f"{R}WordList file path isn't correct!{W}")
-                        input(f'Press {O}ENTER{W} to continue')
-                        return Menus.OFFLINE_DECRYPT()
+                        return Bruteforce.HashCatFormatError()
                 else:
-                    print(f"{R}Hash file path isn't correct!{W}")
-                    input(f'Press {O}ENTER{W} to continue')
-                    return Menus.OFFLINE_DECRYPT()
+                    return Bruteforce.WrongWordListDirectoryWPA()
+            else:
+                return Bruteforce.WrongHandShakeDirectory()
     def DicMD5(HP, WL):
         if HP == 'NONE' or WL == 'NONE':
-                print(f'Please enter full path for the MD5 hashes file: ')
-                HPath = str(input())
-                print('Please enter full path for your wordlist: ')
-                WLPath = str(input())
-                Bruteforce.InputEditor(HPath, WLPath, 'DM')
-            else:
-                HSPVerify = os.path.isfile(f'{HP}')
-                WLPVerify = os.path.isfile(f'{WL}')
-                if HSPVerify == True:
-                    if WLPVerify == True:
-                        print(f'Starting dictionary attack ... {O}[CTRL-C to exit]{W}')
-                        time.sleep(2)
-                        os.system(f'sudo hashcat -m 0 -a 0 -o Data/FoundHashes/MD5-{RR}.txt --remove {HP} {WL} --force')
-                        print(f'{R}Dictionary attack finished ...{W}')
-                        print(f'{R}Cracked hashes saved to {O}Data/FoundHashes{W} file{W}')
-                        input(f'Press {O}ENTER{W} to continue')
-                        return Menus.OFFLINE_DECRYPT()
-                    else:
-                        print(f"{R}WordList file path isn't correct!{W}")
-                        input(f'Press {O}ENTER{W} to continue')
-                        return Menus.OFFLINE_DECRYPT()
-                else:
-                    print(f"{R}Hash file path isn't correct!{W}")
+            print(f'Please enter full path for the MD5 hashes file: ')
+            HPath = str(input())
+            print('Please enter full path for your wordlist: ')
+            WLPath = str(input())
+            Bruteforce.InputEditor(HPath, WLPath, 'DM')
+        else:
+            HSPVerify = os.path.isfile(f'{HP}')
+            WLPVerify = os.path.isfile(f'{WL}')
+            if HSPVerify == True:
+                if WLPVerify == True:
+                    print(f'Starting dictionary attack ... {O}[CTRL-C to exit]{W}')
+                    time.sleep(2)
+                    os.system(f'sudo hashcat -m 0 -a 0 -o Data/FoundHashes/MD5-{RR}.txt --remove {HP} {WL} --force')
+                    print(f'{R}Dictionary attack finished ...{W}')
+                    print(f'{R}Cracked hashes saved to {O}Data/FoundHashes{W} file{W}')
                     input(f'Press {O}ENTER{W} to continue')
                     return Menus.OFFLINE_DECRYPT()
+                else:
+                    return Bruteforce.WrongWordListDirectoryHash()
+            else:
+                return Bruteforce.WrongHashDirectory()
     def BruteMD5(HP):
         if HP == 'NONE':
             print(f'Please enter full path for the MD5 hashes file: ')
@@ -1168,9 +1162,7 @@ class Bruteforce():
                 input(f'Press {O}ENTER{W} to continue')
                 return Menus.OFFLINE_DECRYPT()
             else:
-                print(f"{R}Hash file path isn't correct!{W}")
-                input(f'Press {O}ENTER{W} to continue')
-                return Menus.OFFLINE_DECRYPT()
+                return Bruteforce.WrongHashDirectory()
     def DicSHA256(HP, WL):
         if HP == 'NONE' or WL == 'NONE':
             print(f'Please enter full path for the SHA256 hashes file: ')
@@ -1191,13 +1183,9 @@ class Bruteforce():
                     input(f'Press {O}ENTER{W} to continue')
                     return Menus.OFFLINE_DECRYPT()
                 else:
-                    print(f"{R}WordList file path isn't correct!{W}")
-                    input(f'Press {O}ENTER{W} to continue')
-                    return Menus.OFFLINE_DECRYPT()
+                    return Bruteforce.WrongWordListDirectoryHash()
             else:
-                print(f"{R}Hash file path isn't correct!{W}")
-                input(f'Press {O}ENTER{W} to continue')
-                return Menus.OFFLINE_DECRYPT()
+                return Bruteforce.WrongHashDirectory()
     def BruteSHA256(HP):
         if HP == 'NONE':
             print(f'Please enter full path for the SHA256 hashes file: ')
@@ -1215,9 +1203,7 @@ class Bruteforce():
                 input(f'Press {O}ENTER{W} to continue')
                 return Menus.OFFLINE_DECRYPT()
             else:
-                print(f"{R}Hash file path isn't correct!{W}")
-                input(f'Press {O}ENTER{W} to continue')
-                return Menus.OFFLINE_DECRYPT()
+                return WrongHashDirectory()
 
 #Class for namp-scanner
 class NMAPScan():

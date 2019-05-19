@@ -1,3 +1,6 @@
+Version 2.2.1 -----------------------------------------------------
+  - Fixed bug when launching codex
+
 Version 2.2.0 -----------------------------------------------------
   - Now when hashing you can drag the files to the terminal
 
