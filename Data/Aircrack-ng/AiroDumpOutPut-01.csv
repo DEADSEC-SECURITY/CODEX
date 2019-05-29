@@ -1,0 +1,11 @@
+
+BSSID, First time seen, Last time seen, channel, Speed, Privacy, Cipher, Authentication, Power, # beacons, # IV, LAN IP, ID-length, ESSID, Key
+E0:B9:E5:A7:9B:25, 2019-05-29 20:03:27, 2019-05-29 20:03:32, 11,  54, WPA2 WPA, CCMP TKIP,PSK, -73,        3,        1,   0.  0.  0.  0,  10, MEO-A79B25, 
+EC:08:6B:F3:DA:F8, 2019-05-29 20:03:25, 2019-05-29 20:03:33,  1,  54, WPA2, CCMP,PSK, -55,        7,       98,   0.  0.  0.  0,  14, Casal do Mar 1, 
+E0:B9:E5:A7:3D:39, 2019-05-29 20:03:27, 2019-05-29 20:03:27, 11,  -1, , ,   ,  -1,        0,        0,   0.  0.  0.  0,   0, , 
+0C:80:63:68:A5:E1, 2019-05-29 20:03:31, 2019-05-29 20:03:31, 11,  54, WPA2, CCMP TKIP,PSK, -81,        3,        0,   0.  0.  0.  0,  14, MEO-A73D39_EXT, 
+E2:B9:E5:A7:9B:26, 2019-05-29 20:03:31, 2019-05-29 20:03:31, 11,  54, OPN, ,   , -74,        2,        0,   0.  0.  0.  0,   8, MEO-WiFi, 
+
+Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs
+24:18:1D:D7:6B:FA, 2019-05-29 20:03:25, 2019-05-29 20:03:32, -28,      123, EC:08:6B:F3:DA:F8,
+
