@@ -28,6 +28,7 @@ FileName = 'AiroDumpOutPut' #You can edit this variable
 Directory = 'Data/Aircrack-ng/' #You can edit this variable
 #NMAP
 nm = nmap.PortScanner()
+
 #RANDOM
 RR = random.randint(0, 100000)
 
@@ -170,6 +171,7 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
+        print(f'{W}Session code: {RR}')
 
         OptionMenu = str(input())
 
@@ -247,6 +249,7 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
+        print(f'{W}Session code: {RR}')
         OptionNet = str(input())
 
         if OptionNet == '0':
@@ -296,6 +299,7 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
+        print(f'{W}Session code: {RR}')
 
         OptionWeb = str(input())
 
@@ -343,6 +347,7 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
+        print(f'{W}Session code: {RR}')
 
         DosOption = str(input())
 
@@ -428,6 +433,7 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
+        print(f'{W}Session code: {RR}')
 
         HandOption = str(input())
 
@@ -486,6 +492,7 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
+        print(f'{W}Session code: {RR}')
         offlineOption = str(input())
 
         if offlineOption == '0':
@@ -527,6 +534,7 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'{P}Contribution:{W} If you know how we can automate the .cap to .hccapx process plz let us know!')
         print(f'{C}----------{W}')
+        print(f'{W}Session code: {RR}')
         offlineOption = str(input())
 
         if offlineOption == '0':
