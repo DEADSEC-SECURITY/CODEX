@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.2.1---#
+#---Version 2.2.2---#
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -547,11 +547,11 @@ class Menus():
         if offlineOption == '1':
             return Bruteforce.DicAircrack('NONE', 'NONE')
         if offlineOption == '2':
-            return Bruteforce.BruteAircrack('NONE', 'NONE')
+            return Bruteforce.BruteAircrack('NONE')
         if offlineOption == '3':
             return Bruteforce.DicHashcat('NONE', 'NONE')
         if offlineOption == '4':
-            return Bruteforce.BruteHashcat('NONE', 'NONE')
+            return Bruteforce.BruteHashcat('NONE')
         if offlineOption == '5':
             return Bruteforce.RuleHashcat('NONE', 'NONE')
         if offlineOption == '':
@@ -919,7 +919,7 @@ class Bruteforce():
                 if Attack == 'BH':
                     return Bruteforce.BruteHashcat(HPath)
                 if Attack == 'BM':
-                    return Brutforce.BruteMD5(HPath)
+                    return Bruteforce.BruteMD5(HPath)
                 if Attack == 'BS':
                     return Bruteforce.BruteSHA256(HPath)
         else:
@@ -927,7 +927,7 @@ class Bruteforce():
             CheckAspas = HPath[:1]
             WLCheckAspas = WLPath[:1]
             if CheckAspas == "'":
-                HPathNO = HPath[1:-2]
+                HPathNo = HPath[1:-2]
                 if WLCheckAspas == "'":
                     WLPathNO = WLPath[1:-2]
                     if Attack == 'DA':
@@ -946,7 +946,7 @@ class Bruteforce():
                     if Attack == 'DA':
                         return Bruteforce.DicAircrack(HPath, WLPathNO)
                     if Attack == 'DH':
-                        return Brutefoce.DicHashcat(HPath, WLPathNO)
+                        return Bruteforce.DicHashcat(HPath, WLPathNO)
                     if Attack == 'RH':
                         return Bruteforce.RuleHashcat(HPath, WLPathNO)
                     if Attack == 'DM':
@@ -964,24 +964,49 @@ class Bruteforce():
                         return Bruteforce.DicMD5(HPath, WLPath)
                     if Attack == 'DS':
                         return Bruteforce.DicSHA256(HPath, WLPath)
+    def HccapxGen(HPath, WLPath, Attack):
+        CheckAspas = HPath[:1]
+        TempName = f'Temp-{RR}'
+        Temp = os.path.isfile(f'/home/tony/Desktop/CODEX/Data/HandShakes/Temp/{TempName}.hccapx')
+        TempPath = f'/home/tony/Desktop/CODEX/Data/HandShakes/Temp/{TempName}.hccapx'
+        if CheckAspas == "'":
+            HPathNO = HPath[1:-2]
+            HSPVerify = os.path.isfile(f'{HPathNO}')
+            if HSPVerify == True:
+                if Temp == True:
+                    os.remove(TempPath)
+                    return Bruteforce.HccapxGen(HPath, WLPath, Attack)
+                else:
+                    os.system(f'hcxpcaptool -o {TempPath} {HPath} ')
+                    return Bruteforce.InputEditor(TempPath, WLPath, Attack)
+            else:
+                return Bruteforce.WrongHandShakeDirectory()
+        else:
+            HSPVerify = os.path.isfile(f'{HPath}')
+            if HSPVerify == True:
+                if Temp == True:
+                    os.remove(TempPath)
+                    return Bruteforce.HccapxGen(HPath, WLPath, Attack)
+                else:
+                    os.system(f'hcxpcaptool -o {TempPath} {HPath} ')
+                    return Bruteforce.InputEditor(TempPath, WLPath, Attack)
+            else:
+                return Bruteforce.WrongHandShakeDirectory()
+
     def WrongWordListDirectoryWPA():
-        print('WordList path is wrong please try again!')
+        print(f'{R}WordList path is wrong please try again!{W}')
         input(f'Press {O}ENTER{W} to continue')
-        return Menus.OFFLINE_DECRYPT_WPA()
+        return Menus.OFFLINE_DECRYPT_WPA('OFF')
     def WrongHandShakeDirectory():
-        print('HandShake path is wrong please try again!')
+        print(f'{R}HandShake path is wrong please try again!{W}')
         input(f'Press {O}ENTER{W} to continue')
-        return Menus.OFFLINE_DECRYPT_WPA()
+        return Menus.OFFLINE_DECRYPT_WPA('OFF')
     def WrongWordListDirectoryHash():
         print(f"{R}WordList file path isn't correct!{W}")
         input(f'Press {O}ENTER{W} to continue')
         return Menus.OFFLINE_DECRYPT()
     def WrongHashDirectory():
         print(f"{R}Hash file path isn't correct!{W}")
-        input(f'Press {O}ENTER{W} to continue')
-        return Menus.OFFLINE_DECRYPT()
-    def HashCatFormatError():
-        print(f'{R}HashCat only supports .hccapx format!{W}')
         input(f'Press {O}ENTER{W} to continue')
         return Menus.OFFLINE_DECRYPT()
 
@@ -1015,14 +1040,14 @@ class Bruteforce():
 
         if HP == 'NONE':
             print('Please enter full path for handshake file: ')
-            HP = str(input())
+            HPath = str(input())
             print('Please enter minium password length: ')
             MinPassLength = str(input())
             print('Please enter max password length: ')
             MaxPassLength = str(input())
             print(f'Please enter the network name {O}[If the network name has spaces write it like this "Example\ Password "]{W}:')
             NetWorkName = str(input())
-            Bruteforce.InputEditor(HPath, WLPath, 'BA')
+            Bruteforce.InputEditor(HPath, 'NONE', 'BA')
         else:
             HSPVerify = os.path.isfile(f'{HP}')
             if HSPVerify == True:
@@ -1034,28 +1059,25 @@ class Bruteforce():
                 input(f'Press {O}ENTER{W} to continue')
                 return Menus.OFFLINE_DECRYPT_WPA()
             else:
-                return WrongHandShakeDirectory()
+                return Bruteforce.WrongHandShakeDirectory()
     def DicHashcat(HP, WL):
         if HP == 'NONE' or WL == 'NONE':
-            print(f'Please enter full path for handshake file {O}[.hccapx]{W}: ')
+            print(f'Please enter full path for handshake file: ')
             HPath = str(input())
             print('Please enter full path for your wordlist: ')
             WLPath = str(input())
-            Bruteforce.InputEditor(HPath, WLPath, 'DA')
+            Bruteforce.HccapxGen(HPath, WLPath, 'DH')
         else:
             HSPVerify = os.path.isfile(f'{HP}')
             WLPVerify = os.path.isfile(f'{WL}')
             if HSPVerify == True:
                 if WLPVerify == True:
-                    if HSPFormat == '.hccapx':
-                        print(f'Starting dictionary attack ... {O}[CTRL-C to exit]{W}')
-                        time.sleep(2)
-                        os.system(f'sudo hashcat -a 0 -m 2500 {HP} {WL} --force')
-                        print(f'{R}Dictionary attack finished ...{W}')
-                        input(f'Press {O}ENTER{W} to continue')
-                        return Menus.OFFLINE_DECRYPT()
-                    else:
-                        return Brutforce.HashCatFormatError()
+                    print(f'Starting dictionary attack ... {O}[CTRL-C to exit]{W}')
+                    time.sleep(2)
+                    os.system(f'sudo hashcat -a 0 -m 2500 {HP} {WL} --force')
+                    print(f'{R}Dictionary attack finished ...{W}')
+                    input(f'Press {O}ENTER{W} to continue')
+                    return Menus.OFFLINE_DECRYPT()
                 else:
                     return Bruteforce.WrongWordListDirectoryWPA()
             else:
@@ -1068,12 +1090,12 @@ class Bruteforce():
 
         if HP == 'NONE':
             print('Please enter full path for handshake file: ')
-            handshakePath = str(input())
+            HPath = str(input())
             print('Please enter minium password length: ')
             MinPassLength = str(input())
             print('Please enter max password length: ')
             MaxPassLength = str(input())
-            Bruteforce.InputEditor(HPath, WLPath, 'BH')
+            Bruteforce.HccapxGen(HPath, 'NONE', 'BH')
         else:
             HSPVerify = os.path.isfile(f'{HP}')
             if HSPVerify == True:
@@ -1098,7 +1120,7 @@ class Bruteforce():
             HPath = str(input())
             print('Please enter full path for your wordlist: ')
             WLPath = str(input())
-            Bruteforce.InputEditor(HPath, WLPath, 'DM')
+            Bruteforce.HccapxGen(HPath, WLPath, 'DM')
         else:
             print('Please enter full path for your rule file: ')
             rulePath = str(input())

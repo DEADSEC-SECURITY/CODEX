@@ -1,3 +1,8 @@
+Version 2.2.2 -----------------------------------------------------
+  - Fixed loots of bugs in decrypt menu
+  - Added automatic .cap to .hccapx
+  - Changed Setup.py
+
 Version 2.2.1 -----------------------------------------------------
   - Fixed bug when launching codex
   - Added Session Code
