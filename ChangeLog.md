@@ -1,5 +1,13 @@
+Version 2.2.3 -----------------------------------------------------
+  - Fixed bugs
+  - Added airodump for data capture
+  - Added data captured analizer using URLSNARF | DSNIFF | DRIFTNET
+  - Added discord code
+  - Now codex.py can be run using ./codex.py instead of python3 codex.py
+  - Now setup.py can be run using ./Setup.py instead of python3 Setup.py
+
 Version 2.2.2 -----------------------------------------------------
-  - Fixed loots of bugs in decrypt menu
+  - Fixed bugs in decrypt menu
   - Added automatic .cap to .hccapx
   - Changed Setup.py
 

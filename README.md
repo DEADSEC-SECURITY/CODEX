@@ -6,7 +6,6 @@ BitCoin Wallet: 1JFMYXkUzwtsrx3L5HDvJ9G2QXnDCm5wvz
 
 Ethereum Wallet: 0xf2fCa59c1CAF7533FaB5eED88ECa3B161e1Bc5B3
 
-PayPal: mariana0407@outlook.pt
 
 **CREADITS**
 
@@ -37,9 +36,9 @@ $ sudo python3 codex.py
 **SCRIPT SCREENSHOTS**
 
   *MAIN MENU*
-  
+
   ![alt text](https://github.com/DEADSEC-SECURITY/CODEX/blob/master/utils/IMG/main1.png)
 
   *NET MENU*
-  
+
   ![alt text](https://github.com/DEADSEC-SECURITY/CODEX/blob/master/utils/IMG/net1.png)

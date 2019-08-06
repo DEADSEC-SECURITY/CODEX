@@ -1,40 +1,40 @@
+#!/usr/bin/python3
+#-*- coding: utf-8 -*-
+
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.2.2---#
+#---Version 2.2.3---#
 
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 #IMPORT DEPENDENCYS
-from tld import get_tld
-import sys
-import os
-import json
-import subprocess
-import time
-import pandas
-import nmap
-import netifaces
-import random
 #IMPORT UTILS
 from utils.colors import *
 from utils.ExtraVariables import *
-#Variables
-TraceBack = 1         # 0 For OFF | 1 For ON
-#TRACEBACK
-sys.tracebacklimit = TraceBack
+
+try:
+    from tld import get_tld
+    import json
+    import subprocess
+    import time
+    import pandas
+    import nmap
+    import netifaces
+    import random
+except ImportError as error:
+    print(C + Banner)
+    print()
+    print(f'{Danger} {R}ImportError: Missing modules or incorrect path! Please run{O} setup.py {R}first.')
+    exit(f'{Danger} {R}Error: {O}{error}')
+
 #AIRODUMP VARIABLES
 FileName = 'AiroDumpOutPut' #You can edit this variable
 Directory = 'Data/Aircrack-ng/' #You can edit this variable
+
 #NMAP
 nm = nmap.PortScanner()
 
 #RANDOM
 RR = random.randint(0, 100000)
-
-#OS to clean the screen
-def OS():
-    os.system('cls' if os.name == 'nt' else 'clear')
 
 #First class to run to check everything
 class Verify():
@@ -78,21 +78,25 @@ class Verify():
         text = str(process.communicate()[0])
         CleanText = text[2:-3]
 
-        if CleanText == '1':
-            interface = interface
-            mode = 'managed'
-            return Menus.StartMenu()
+        if interface[-3:] == 'mon':
 
-        if CleanText != '1':
-            interface = interface + 'mon'
-            mode = 'monitor'
-            return Menus.StartMenu()
+            if CleanText == '0' or CleanText !='1':
+                interface = interface[:-3]
+                mode = 'managed'
 
+            if CleanText == '1':
+                interface = interface
+                mode = 'monitor'
         else:
-            OS()
-            print(f'Problem loading interface please check line 67')
-            input(f'Press {O}ENTER{W} to continue')
-            sys.exit()
+            if CleanText == '0':
+                interface = interface[:-3]
+                mode = 'managed'
+
+            if CleanText == '1' or CleanText !='0':
+                interface = interface + 'mon'
+                mode = 'monitor'
+
+        return Menus.StartMenu()
 
     #CHECKS FOR EXISTING DEFAULT INETERFACE
     def DefaultInterface():
@@ -173,9 +177,9 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'{W}Session code: {RR}')
 
-        OptionMenu = str(input())
+        Option = str(input())
 
-        if OptionMenu == '0':
+        if Option == '0':
             if mode == 'monitor':
                 print(f'Would you like to preserve {O}monitor{W} mode?')
                 PO = input()
@@ -196,21 +200,21 @@ class Menus():
             else:
                 print('Exiting script!')
                 return sys.exit()
-        if OptionMenu == '1':
+        if Option == '1':
             return Menus.WEB()
-        if OptionMenu == '2':
+        if Option == '2':
             return Menus.NET()
-        if OptionMenu == '3':
+        if Option == '3':
             return Menus.OFFLINE_DECRYPT()
-        if OptionMenu == '4':
+        if Option == '4':
             return InterfaceOptions.InterfaceSelect('StartMenu')
-        if OptionMenu == '5':
+        if Option == '5':
             return Defaults.IP()
-        if OptionMenu == '6':
+        if Option == '6':
             return Defaults.PortRange()
-        if OptionMenu == '7':
+        if Option == '7':
             return Defaults.Interface()
-        if OptionMenu == '':
+        if Option == '':
             return Menus.StartMenu()
         else:
             print(f'Please use only numbers between {O}0{W} and{O} 6{W}')
@@ -225,17 +229,18 @@ class Menus():
         print(R + Banner)
         print(G + Dead)
         print(f'{B}************ Network Attack Menu ************{W}')
-        print('0) Return to main menu')
-        print('1) Select another network interface')
-        print('2) Put interface in monitor mode')
-        print('3) Put interface in managed mode')
-        print(f'4) Explore for targets {O}[Monitor Mode Needed]{W}')
+        print('00) Return to main menu')
+        print('01) Select another network interface')
+        print('02) Put interface in monitor mode')
+        print('03) Put interface in managed mode')
+        print(f'04) Explore for targets {O}[Monitor Mode Needed]{W}')
         print(f'{C}----------{W}')
-        print('5) DoS Attack menu')
-        print('6) HandShake Tools menu')
-        print('7) WPA/WPA2 decrypt menu')
-        print(f'8) Evil twin attack menu {O}[WORK IN PROGRESS]{W}')
-        print('9) NMAP menu')
+        print('05) DoS Attack menu')
+        print('06) HandShake Tools menu')
+        print('07) Capture data menu')
+        print('08) WPA/WPA2 decrypt menu')
+        print(f'09) Evil twin attack menu {O}[WORK IN PROGRESS]{W}')
+        print('10) NMAP menu')
         print('')
         print(f'{C}----------{W}')
         print(f'{W}Interface {O}{interface} {W}selected. Mode {O}{mode}{W}.')
@@ -250,34 +255,39 @@ class Menus():
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
         print(f'{W}Session code: {RR}')
-        OptionNet = str(input())
+        Option = str(input())
 
-        if OptionNet == '0':
+        if Option == '0' or Option == '00':
             return Menus.StartMenu()
-        if OptionNet == '1':
+        if Option == '1' or Option == '01':
             return InterfaceOptions.InterfaceSelect('NET')
-        if OptionNet == '2':
+        if Option == '2' or Option == '02':
             return InterfaceOptions.monitor('NET')
-        if OptionNet == '3':
+        if Option == '3' or Option == '03':
             return InterfaceOptions.managed('NET')
-        if OptionNet == '4':
+        if Option == '4' or Option == '04':
             if mode == 'monitor':
                 return AiroDump.Explorer('NET')
             if mode == 'managed':
                 print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
                 return Menus.NET()
-        if OptionNet == '5':
+            else:
+                print(f"{Danger} {R}Can't detect if interface is {O}monitor {R}or {O}managed {R}mode!\n Please restart codex.py")
+                sys.exit()
+        if Option == '5' or Option == '05':
             return Menus.DOS()
-        if OptionNet == '6':
+        if Option == '6' or Option == '06':
             return Menus.HANDSHAKE()
-        if OptionNet == '7':
+        if Option == '7' or Option == '07':
+            return Menus.DataCaptureMenu()
+        if Option == '8' or Option == '08':
             return Menus.OFFLINE_DECRYPT_WPA('NET')
-        if OptionNet == '8':
+        if Option == '9' or Option == '09':
             pass
-        if OptionNet == '9':
+        if Option == '10':
             return NMAPScan.menu()
-        if OptionNet == '':
+        if Option == '':
             return Menus.NET()
         else:
             print(f'Please use only numbers between {O}0{W} and{O} 9{W}')
@@ -301,15 +311,15 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'{W}Session code: {RR}')
 
-        OptionWeb = str(input())
+        Option = str(input())
 
-        if OptionWeb == '0':
+        if Option == '0':
             return Menus.StartMenu()
-        if OptionWeb == '1':
+        if Option == '1':
             return WEBAM.FWC()
-        if OptionWeb == '2':
+        if Option == '2':
             pass
-        if OptionWeb == '':
+        if Option == '':
             return Menus.WEB()
         else:
             print(f'Please use only numbers between {O}0{W} and{O} 2{W}')
@@ -349,45 +359,45 @@ class Menus():
         print(f'{C}----------{W}')
         print(f'{W}Session code: {RR}')
 
-        DosOption = str(input())
+        Option = str(input())
 
-        if DosOption == '0':
+        if Option == '0':
             return Menus.NET()
-        if DosOption == '1':
+        if Option == '1':
             return InterfaceOptions.InterfaceSelect('DOS')
-        if DosOption == '2':
+        if Option == '2':
             return InterfaceOptions.monitor('DOS')
-        if DosOption == '3':
+        if Option == '3':
             return InterfaceOptions.managed('DOS')
-        if DosOption == '4':
+        if Option == '4':
             if mode == 'monitor':
                 return AiroDump.Explorer('DOS')
             if mode == 'managed':
                 print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
                 return Menus.DOS()
-        if DosOption == '5':
+        if Option == '5':
             if mode == 'monitor':
                 return Attacks.MDK3()
             if mode == 'managed':
                 print(f'{Danger} Please put your card in{O} monitor {W}mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
                 return Menus.DOS()
-        if DosOption == '6':
+        if Option == '6':
             if mode == 'monitor':
                 return Attacks.Aireplay()
             if mode == 'managed':
                 print(f'{Danger} Please put your card in{O} monitor {W}mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
                 return Menus.DOS()
-        if DosOption == '7':
+        if Option == '7':
             if mode == 'monitor':
                 return Attacks.Confusion()
             if mode == 'managed':
                 print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
                 return Menus.DOS()
-        if DosOption == '':
+        if Option == '':
             return Menus.DOS()
         else:
             print(f'{Danger} Please only use numbers between {O}0{W} and{O} 7{W}')
@@ -434,39 +444,38 @@ class Menus():
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
         print(f'{W}Session code: {RR}')
+        Option = str(input())
 
-        HandOption = str(input())
-
-        if HandOption == '0':
+        if Option == '0':
             return Menus.NET()
-        if HandOption == '1':
+        if Option == '1':
             return InterfaceOptions.InterfaceSelect('HANDSHAKE')
-        if HandOption == '2':
+        if Option == '2':
             return InterfaceOptions.monitor('HANDSHAKE')
-        if HandOption == '3':
+        if Option == '3':
             return InterfaceOptions.managed('HANDSHAKE')
-        if HandOption == '4':
+        if Option == '4':
             if mode == 'monitor':
                 return AiroDump.Explorer('HANDSHAKE')
             if mode == 'managed':
                 print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
                 return Menus.HANDSHAKE()
-        if HandOption == '5':
+        if Option == '5':
             if mode == 'monitor':
                 return Attacks.HandShake('MDK3')
             if mode == 'managed':
                 print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
                 return Menus.HANDSHAKE()
-        if HandOption == '6':
+        if Option == '6':
             if mode == 'monitor':
                 return Attacks.HandShake('Aireplay')
             if mode == 'managed':
                 print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
                 input(f'{Danger} Click {O}ENTER{W} to continue')
                 return Menus.HANDSHAKE()
-        if HandOption == '':
+        if Option == '':
             return Menus.HANDSHAKE()
         else:
             print(f'Please use only numbers between {O}0{W} and{O} 6{W}')
@@ -493,21 +502,21 @@ class Menus():
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
         print(f'{W}Session code: {RR}')
-        offlineOption = str(input())
+        Option = str(input())
 
-        if offlineOption == '0':
+        if Option == '0':
             return Menus.StartMenu()
-        if offlineOption == '1':
+        if Option == '1':
             return Menus.OFFLINE_DECRYPT_WPA('OFF')
-        if offlineOption == '2':
+        if Option == '2':
             return Bruteforce.DicMD5('NONE', 'NONE')
-        if offlineOption == '3':
+        if Option == '3':
             return Bruteforce.BruteMD5('NONE')
-        if offlineOption == '4':
+        if Option == '4':
             return Bruteforce.DicSHA256('NONE', 'NONE')
-        if offlineOption == '5':
+        if Option == '5':
             return Bruteforce.BruteSHA256('NONE')
-        if offlineOption == '':
+        if Option == '':
             return Menus.OFFLINE_DECRYPT()
         else:
             print(f'Please use only numbers between {O}1{W} and{O} 1{W}')
@@ -535,31 +544,115 @@ class Menus():
         print(f'{P}Contribution:{W} If you know how we can automate the .cap to .hccapx process plz let us know!')
         print(f'{C}----------{W}')
         print(f'{W}Session code: {RR}')
-        offlineOption = str(input())
+        Option = str(input())
 
-        if offlineOption == '0':
+        if Option == '0':
             if Menu == 'OFF':
                 return Menus.OFFLINE_DECRYPT()
             if Menu == 'NET':
                 return Menus.NET()
             else:
                 return Menus.NET()
-        if offlineOption == '1':
+        if Option == '1':
             return Bruteforce.DicAircrack('NONE', 'NONE')
-        if offlineOption == '2':
+        if Option == '2':
             return Bruteforce.BruteAircrack('NONE')
-        if offlineOption == '3':
+        if Option == '3':
             return Bruteforce.DicHashcat('NONE', 'NONE')
-        if offlineOption == '4':
+        if Option == '4':
             return Bruteforce.BruteHashcat('NONE')
-        if offlineOption == '5':
+        if Option == '5':
             return Bruteforce.RuleHashcat('NONE', 'NONE')
-        if offlineOption == '':
+        if Option == '':
             return Menus.OFFLINE_DECRYPT_WPA(Menu)
         else:
             print(f'Please use only numbers between {O}1{W} and{O} 5{W}')
             input(f'Press {O}ENTER{W} to continue')
             return Menus.OFFLINE_DECRYPT_WPA()
+
+    def DataCaptureMenu():
+
+        Dir = "Data/CaptureData"
+        ListDir = os.listdir(Dir)
+
+        #Will search for items that end in .cs and .netxml and deleat them!
+        for item in ListDir:
+            if item.endswith('.csv'):
+                os.remove(os.path.join(Dir, item))
+            if item.endswith('.netxml'):
+                os.remove(os.path.join(Dir, item))
+
+        OS()
+        print()
+        print(R + Banner)
+        print(G + Dead)
+        print(f'{B}************ Campture Data Menu ************{W}')
+        print('0) Return to NET menu')
+        print('1) Select another network interface')
+        print('2) Put interface in monitor mode')
+        print('3) Put interface in managed mode')
+        print(f'4) Explore for targets {O}[Monitor Mode Needed]{W}')
+        print(f'{C}----------{W}')
+        print(f'5) Capture data {C}[AiroDump] {O}[Monitor Mode Needed]{W}')
+        print('6) Full .cap file scan')
+        print(f'7) Url .cap file scan {C}[URLSNARF]{W}')
+        print(f'8) Password .cap file scan {C}[DSNIFF]{W}')
+        print(f'9) Image .cap file scan {C}[DRIFTNET]{W}')
+        print('')
+        print(f'{C}----------{W}')
+        print(f'{W}Interface {O}{interface} {W}selected. Mode {O}{mode}{W}.')
+        print(f'{C}----------{W}')
+        print(f'Select ESSID: {O}{essid}{W}')
+        print(f'Selected BSSID: {O}{bssid}{W}')
+        print(f'Selected Channel: {O}{channel}{W}')
+        print(f'Type of Encryption: {O}{encrypt}{W}')
+        print(f'{C}----------{W}')
+        print(f'{G}NOTE:{W} In case you cant change from monitor to managed restart you pc!')
+        print(f'{C}----------{W}')
+        print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
+        print(f'{C}----------{W}')
+        print(f'{W}Session code: {RR}')
+        Option = str(input())
+
+        if Option == '0':
+            return Menus.NET()
+        if Option == '1':
+            return InterfaceOptions.InterfaceSelect('DATA')
+        if Option == '2':
+            return InterfaceOptions.monitor('DATA')
+        if Option == '3':
+            return InterfaceOptions.managed('DATA')
+        if Option == '4':
+            if mode == 'monitor':
+                return AiroDump.Explorer('DATA')
+            if mode == 'managed':
+                print(f'{Danger} Please put your card in {O}monitor{W} mode before using this!')
+                input(f'{Danger} Click {O}ENTER{W} to continue')
+                return Menus.DataCaptureMenu()
+            else:
+                print(f"{Danger} {R}Can't detect if interface is {O}monitor {R}or {O}managed {R}mode!\n Please restart codex.py")
+                sys.exit()
+        if Option == '5':
+            if channel != 'NONE':
+                return Attacks.CaptureData()
+            else:
+                print(f'{Danger} Please select a target before using this!')
+                input(f'{Danger} Click {O}ENTER{W} to continue')
+                return Menus.DataCaptureMenu()
+        if Option == '6':
+            return Attacks.FullCapScan()
+        if Option == '7':
+            return Attacks.UrlCapScan()
+        if Option == '8':
+            return Attacks.PwrCapScan()
+        if Option == '9':
+            return Attacks.ImgCapScan()
+        if Option == '':
+            return Menus.DataCaptureMenu()
+        else:
+            print(f'Please use only numbers between {O}0{W} and{O} 9{W}')
+            input(f'Press {O}ENTER{W} to continue')
+            return Menus.DataCaptureMenu()
 
 #Class for Web Attack
 class WEBAM():
@@ -606,49 +699,27 @@ class InterfaceOptions():
             print(f'Please use only numbers between {O}1{W} and{O} {NTCount}{W}')
             input(f'Press {O}ENTER{W} to continue')
             return InterfaceOptions.InterfaceSelect(Menu)
-
         else:
             After = IntefaceNumber - 1
-            interface = str(NetworkInterfaces[After:IntefaceNumber])
-            inte = interface[2:-2]
+            interface = str(NetworkInterfaces[After])
             #--------------------#
-            process = subprocess.Popen(['cat', f'/sys/class/net/{inte}/carrier'], stdout = subprocess.PIPE)
-            text = str(process.communicate()[0])
-            CleanText = text[2:-3]
-
-            if CleanText == '1':
-                interface = inte
-                mode = 'managed'
-                if Menu == 'StartMenu':
-                    return Menus.StartMenu()
-                if Menu == 'NET':
-                    return Menus.NET()
-                if Menu == 'DOS':
-                    return Menus.DOS()
-                if Menu == 'HANDSHAKE':
-                    return Menus.HANDSHAKE()
-                else:
-                    return Menus.StartMenu()
-
-            if CleanText != '1':
-                interface = inte + 'mon'
+            if interface[-3:] == 'mon':
                 mode = 'monitor'
-                if Menu == 'StartMenu':
-                    return Menus.StartMenu()
-                if Menu == 'NET':
-                    return Menus.NET()
-                if Menu == 'DOS':
-                    return Menus.DOS()
-                if Menu == 'HANDSHAKE':
-                    return Menus.HANDSHAKE()
-                else:
-                    return Menus.StartMenu()
-
             else:
-                OS()
-                print(f'Problem loading interface please check line 543')
-                input(f'Press {O}ENTER{W} to continue')
-                sys.exit()
+                mode = 'managed'
+
+            if Menu == 'StartMenu':
+                return Menus.StartMenu()
+            if Menu == 'NET':
+                return Menus.NET()
+            if Menu == 'DOS':
+                return Menus.DOS()
+            if Menu == 'HANDSHAKE':
+                return Menus.HANDSHAKE()
+            if Menu == 'DATA':
+                return Menus.DataCaptureMenu()
+            else:
+                return Menus.StartMenu()
 
     def monitor(Menu):
 
@@ -659,12 +730,17 @@ class InterfaceOptions():
             OS()
             os.system(f'sudo airmon-ng start {interface}')
             interface = interface + 'mon'
-            process = subprocess.Popen(['iw', interface, 'info'], stdout=subprocess.PIPE)
+            process = subprocess.Popen(['cat', f'/sys/class/net/{interface}/carrier'], stdout = subprocess.PIPE)
             text = str(process.communicate()[0])
-            begin = 'ttype'
-            end = 'twiphy'
-            CleanFile = text[text.find(begin):text.find(end)]
-            mode = CleanFile[6:-3]
+            CleanText = text[2:-3]
+
+            if CleanText == '0' or CleanText !='1':
+                interface = interface[:-3]
+                mode = 'managed'
+
+            if CleanText == '1':
+                interface = interface
+                mode = 'monitor'
 
             print()
             print(f'{W}Interface now in {O}monitor{W} mode!')
@@ -675,6 +751,8 @@ class InterfaceOptions():
                 return Menus.DOS()
             if Menu == 'HANDSHAKE':
                 return Menus.HANDSHAKE()
+            if Menu == 'DATA':
+                return Menus.DataCaptureMenu()
             else:
                 return Menus.NET()
 
@@ -687,6 +765,8 @@ class InterfaceOptions():
                 return Menus.DOS()
             if Menu == 'HANDSHAKE':
                 return Menus.HANDSHAKE()
+            if Menu == 'DATA':
+                return Menus.DataCaptureMenu()
             else:
                 return Menus.NET()
 
@@ -699,12 +779,18 @@ class InterfaceOptions():
             OS()
             os.system(f'sudo airmon-ng stop {interface}')
             interface = interface[:-3]
-            process = subprocess.Popen(['iw', interface, 'info'], stdout=subprocess.PIPE)
+            process = subprocess.Popen(['cat', f'/sys/class/net/{interface}/carrier'], stdout = subprocess.PIPE)
             text = str(process.communicate()[0])
-            begin = 'ttype'
-            end = 'twiphy'
-            CleanFile = text[text.find(begin):text.find(end)]
-            mode = CleanFile[6:-3]
+            CleanText = text[2:-3]
+
+            if CleanText == '0':
+                interface = interface[:-3]
+                mode = 'managed'
+
+            if CleanText == '1' or CleanText !='0':
+                interface = interface
+                mode = 'monitor'
+
 
             print()
             print(f'{W}Interface now in {O}managed{W} mode!')
@@ -718,6 +804,8 @@ class InterfaceOptions():
             if Menu == 'EXIT':
                 print('Exiting script')
                 return sys.exit()
+            if Menu == 'DATA':
+                return Menus.DataCaptureMenu()
             else:
                 return Menus.NET()
         else:
@@ -732,6 +820,8 @@ class InterfaceOptions():
             if Menu == 'EXIT':
                 print('Exiting script')
                 return sys.exit()
+            if Menu == 'DATA':
+                return Menus.DataCaptureMenu()
             else:
                 return Menus.NET()
 
@@ -814,6 +904,90 @@ class Attacks():
                 input(f'Press {O}ENTER{W} to continue!')
                 return Menus.HANDSHAKE()
 
+    def CaptureData():
+        FileName = str(input(f'Please enter a name for your captured file {P}[Default:CaptureFile]{W}: '))
+        if FileName == '':
+            FileName = 'CaptureFile'
+
+        print(f'Press {O}ENTER{W} to start capture')
+        print(f'Starting capture ... {O}[CTRL-C to exit]{W}')
+        os.system(f'sudo xterm -title AIRODUMP -fg green -geometry 140x30-0+0 -e sudo airodump-ng -c {channel} -w Data/CaptureData/{FileName} {interface}')
+        print(f'HandShake file saved in {O}Data/CaptureData{W}')
+        input(f'Press {O}ENTER{W} to continue!')
+        return Menus.DataCaptureMenu()
+
+    def FullCapScan():
+        FileName = str(input(f'Please enter a path for your capture file {P}[Default:Data/CaptureData/CaptureFile-01.cap]{W}: '))
+        if FileName == '':
+            FileName = 'Data/CaptureData/CaptureFile-01.cap'
+        else:
+            Exist = os.path.isfile(FileName)
+            if Exist != True:
+                print(f'{R}Capture file path is wrong please try again!{W}')
+                input(f'Press {O}ENTER{W} to continue')
+                return Attacks.FullCapScan()
+
+        print(f'Press {O}ENTER{W} to start file scan')
+        print(f'Starting file scan ... {O}[CTRL-C to exit]{W}')
+        os.system(f'sudo xterm -hold -title URLSNARF -fg green -geometry 140x30-0+0 -e sudo urlsnarf -p {FileName} & sudo xterm -hold -title DSNIFF -fg green -geometry 140x30+0+0 -e sudo dsniff -p {FileName} & sudo xterm -hold -title DRIFTNET -fg green -geometry 140x30-0-0 -e sudo driftnet -f {FileName} -a -d Data/CaptureData/Images')
+        print(f'Scanned files saved in {O}Data/CaptureData{W} and {O}Data/CaptureData/Images{W}')
+        input(f'Press {O}ENTER{W} to continue!')
+        return Menus.DataCaptureMenu()
+
+    def UrlCapScan():
+        FileName = str(input(f'Please enter a path for your capture file {P}[Default:Data/CaptureData/CaptureFile-01.cap]{W}: '))
+        if FileName == '':
+            FileName = 'Data/CaptureData/CaptureFile-01.cap'
+        else:
+            Exist = os.path.isfile(FileName)
+            if Exist != True:
+                print(f'{R}Capture file path is wrong please try again!{W}')
+                input(f'Press {O}ENTER{W} to continue')
+                return Attacks.UrlCapScan()
+
+        print(f'Press {O}ENTER{W} to start file scan')
+        print(f'Starting file scan ... {O}[CTRL-C to exit]{W}')
+        os.system(f'sudo xterm -hold -title URLSNARF -fg green -geometry 140x30-0+0 -e sudo urlsnarf -p {FileName}')
+        print(f'Scanned files saved in {O}Data/CaptureData{W} ')
+        input(f'Press {O}ENTER{W} to continue!')
+        return Menus.DataCaptureMenu()
+
+    def PwrCapScan():
+        FileName = str(input(f'Please enter a path for your capture file {P}[Default:Data/CaptureData/CaptureFile-01.cap]{W}: '))
+        if FileName == '':
+            FileName = 'Data/CaptureData/CaptureFile-01.cap'
+        else:
+            Exist = os.path.isfile(FileName)
+            if Exist != True:
+                print(f'{R}Capture file path is wrong please try again!{W}')
+                input(f'Press {O}ENTER{W} to continue')
+                return Attacks.PwrCapScan()
+
+        print(f'Press {O}ENTER{W} to start file scan')
+        print(f'Starting file scan ... {O}[CTRL-C to exit]{W}')
+        os.system(f'sudo xterm -hold -title DSNIFF -fg green -geometry 140x30-0+0 -e sudo dsniff -p {FileName}')
+        print(f'Scanned files saved in {O}Data/CaptureData{W} ')
+        input(f'Press {O}ENTER{W} to continue!')
+        return Menus.DataCaptureMenu()
+
+    def ImgCapScan():
+        FileName = str(input(f'Please enter a path for your capture file {P}[Default:Data/CaptureData/CaptureFile-01.cap]{W}: '))
+        if FileName == '':
+            FileName = 'Data/CaptureData/CaptureFile-01.cap'
+        else:
+            Exist = os.path.isfile(FileName)
+            if Exist != True:
+                print(f'{R}Capture file path is wrong please try again!{W}')
+                input(f'Press {O}ENTER{W} to continue')
+                return Attacks.ImgCapScan()
+
+        print(f'Press {O}ENTER{W} to start file scan')
+        print(f'Starting file scan ... {O}[CTRL-C to exit]{W}')
+        os.system(f'sudo xterm -hold -title DRIFTNET -fg green -geometry 140x30-0+0 -e sudo driftnet -f {FileName} -a -d Data/CaptureData/Images')
+        print(f'Scanned files saved in {O}Data/CaptureData/Images{W}')
+        input(f'Press {O}ENTER{W} to continue!')
+        return Menus.DataCaptureMenu()
+
 #Class for airodump-ng
 class AiroDump():
 
@@ -887,6 +1061,8 @@ class AiroDump():
                     return Menus.NET()
                 if Menu == 'HANDSHAKE':
                     return Menus.HANDSHAKE()
+                if Menu == 'DATA':
+                    return Menus.DataCaptureMenu()
                 else:
                     return Menus.NET()
             number = number + 1

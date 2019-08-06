@@ -3,7 +3,7 @@
     {
       "defaultportrange": "22-445",
       "defaultipaddress": "127.0.0.1",
-      "defaultinterface": "wlp3s0"
+      "defaultinterface": "wlp3s0mon"
     }
   ]
 }

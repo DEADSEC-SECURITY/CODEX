@@ -1,9 +1,9 @@
+#!/usr/bin/python3
+#-*- coding: utf-8 -*-
+
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
 #---Version 2.1.5---#
-
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 #IMPORT DEPENDENCYS
 import os
@@ -21,7 +21,9 @@ else:
     os.system('pip3 install tld')
     print(f'{Plus}{G} Installing PANDAS ...{W}')
     os.system('pip3 install pandas')
-    print(f'{Plus}{G} Installing NMAP ...{W}')
+    print(f'{Plus}{G} Uninstalling NAMP ...{W}')
+    os.system('pip3 uninstall nmap')
+    print(f'{Plus}{G} Installing Python-NMAP ...{W}')
     os.system('pip3 install python-nmap')
     print(f'{Plus}{G} Installing NETIFACES ...{W}')
     os.system('pip3 install netifaces')
@@ -36,6 +38,12 @@ else:
     os.system('sudo apt-get install whois')
     print(f'{Plus}{G} Installing CRUNCH ...{W}')
     os.system('sudo apt-get install crunch')
+    print(f'{Plus}{G} Installing XTERM ...{W}')
+    os.system('sudo apt get install xterm')
+    print(f'{Plus}{G} Installing DRIFTNET ...{W}')
+    os.system('sudo apt install driftnet')
+    print(f'{Plus}{G} Installing DRIFTNET ...{W}')
+    os.system('sudo apt install dsniff')
     #print(f'{Plus}{G} Installing hcxtools ...{W}')
     #os.system('cd ~/Desktop/CODEX/utils/hcxtools & sudo make & sudo make install')
     print(f'{R}Please manually install https://github.com/ZerBea/hcxtools{W}')
