@@ -1,3 +1,8 @@
+Version 2.2.4 -----------------------------------------------------
+  - Fixed WPA decrypt functionality
+  - Added new binaries for cap2hccapx
+  - Added opencl to setup.py for hashcat support
+
 Version 2.2.3 -----------------------------------------------------
   - Fixed bugs
   - Added airodump for data capture

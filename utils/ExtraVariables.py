@@ -1,6 +1,6 @@
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.2.3---#
+#---Version 2.2.4---#
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
