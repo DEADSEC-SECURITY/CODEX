@@ -85,7 +85,6 @@ class Verify():
                 mode = 'managed'
 
             if CleanText == '1':
-                interface = interface
                 mode = 'monitor'
         else:
             if CleanText == '0':
@@ -743,7 +742,6 @@ class InterfaceOptions():
                 mode = 'managed'
 
             if CleanText == '1':
-                interface = interface
                 mode = 'monitor'
 
             print()
@@ -792,7 +790,6 @@ class InterfaceOptions():
                 mode = 'managed'
 
             if CleanText == '1' or CleanText !='0':
-                interface = interface
                 mode = 'monitor'
 
 

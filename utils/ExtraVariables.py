@@ -4,14 +4,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-try:
-    import os
-    import sys
-except ImportError as error:
-    print(C + Banner)
-    print()
-    print(f'{Danger} {R}ImportError: Missing modules or incorrect path! Please run{O} setup.py {R}first.')
-    exit(f'{Danger} {R}Error: {O}{error}')
+from utils.colors import *
 
 Banner = '''     __       ______   ______    _______   __________   ___     __
     |  |     /      | /  __  \  |       \ |   ____\  \ /  /    |  |
@@ -27,6 +20,16 @@ Dead = f'''
               		GitHub     : CODEX
               		Discord    : dFD5HHa
               		'''
+
+try:
+    import os
+    import sys
+except ImportError as error:
+    print(C + Banner)
+    print()
+    print(f'{Danger} {R}ImportError: Missing modules or incorrect path! Please run{O} setup.py {R}first.')
+    exit(f'{Danger} {R}Error: {O}{error}')
+
 #DEFAULT SETTINGS [DONT CHANGE]
 bssid = 'NONE'
 channel = 'NONE'
