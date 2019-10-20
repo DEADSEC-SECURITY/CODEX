@@ -1,3 +1,14 @@
+Version 2.2.5 -----------------------------------------------------
+  - Added BIG-WPA-LIST-1.rar wordlist
+  - Added BIG-WPA-LIST-2.rar wordlist
+  - Added BIG-WPA-LIST-3.rar wordlist
+  - Added darkc0de.lst wordlist
+  - Added Names.txt wordlist
+  - Added rockyou.txt wordlist
+  - Added Uninstall.py so you can uninstall codex
+  - Added Cewl in Web Attack menu for website word grabbing.
+  - Fixed TemPath not found error at Decrypt menu
+
 Version 2.2.4 -----------------------------------------------------
   - Fixed WPA decrypt functionality
   - Added new binaries for cap2hccapx

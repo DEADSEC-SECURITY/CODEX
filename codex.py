@@ -3,11 +3,9 @@
 
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.2.4---#
-
+#---Version 2.2.5---#
 
 #IMPORT DEPENDENCYS
-#IMPORT UTILS
 from utils.colors import *
 from utils.ExtraVariables import *
 
@@ -157,7 +155,7 @@ class Menus():
         print(G + Dead)
         print(f'{B}************ Welcome to Codex ************{W}')
         print('0) Exit script')
-        print(f'1) WEB Attacks {O}[WORK IN PROGRESS]{W}')
+        print('1) WEB Attacks')
         print('2) Network Attacks')
         print('3) Decrypt Menu')
         print(f'{B}**************** Options *****************{W}')
@@ -302,26 +300,22 @@ class Menus():
         print(G + Dead)
         print(f'{B}************ Web Attack Menu ************{W}')
         print('0) Return to main menu')
-        print('1) Full Website Check')
-        print('2) SQL Injection')
+        print('1) Cewl website word grabber')
         print()
         print(f'{C}----------{W}')
         print(f'{P}Contribution:{W} If you find any bug please help me fix it or report it to me!')
         print(f'{C}----------{W}')
         print(f'{W}Session code: {RR}')
-
         Option = str(input())
 
         if Option == '0':
             return Menus.StartMenu()
         if Option == '1':
-            return WEBAM.FWC()
-        if Option == '2':
-            pass
+            return WEBAM.CEWL()
         if Option == '':
             return Menus.WEB()
         else:
-            print(f'Please use only numbers between {O}0{W} and{O} 2{W}')
+            print(f'Please use only numbers between {O}0{W} and{O} 1{W}')
             input(f'Press {O}ENTER{W} to continue')
             return Menus.StartMenu()
 
@@ -484,7 +478,12 @@ class Menus():
     #OFFLINE_DECRYPT MENU
     def OFFLINE_DECRYPT():
 
-        if os.isfile(TempPath):
+        global TempPath
+
+        TempName = f'Temp-{RR}'
+        TempPath = f'Data/HandShakes/Temp/{TempName}.hccapx'
+
+        if os.path.isfile(TempPath):
             os.remove(TempPath)
 
         OS()
@@ -659,17 +658,14 @@ class Menus():
 
 #Class for Web Attack
 class WEBAM():
-    def FWC():
-        Web = input('Please enter the website you want to scan: ')
-        TLD = get_tld(Web, as_object = True)
-        WebNoWWWNoHTTP = TLD.fld
-
-        OS()
-        print('Starting ...')
-        process = os.popen(f'whois {TLD}')
-        WhoisOutput = str(process.read())
-
-        print(WhoisOutput)
+    def CEWL():
+        WebSite = str(input('Please enter the website you want to scan: [Example: http(s)://YourWebsite.com] '))
+        MiniumWordLength = str(input('Please enter the minium word length: [Use only numbers > 0] '))
+        Depth = str(input('Please enter the page depth: [Use only numbers > 0] '))
+        os.system(f'utils/CeWL/cewl.rb -d {Depth} -m {MiniumWordLength} -w Data/CewlWordlists/CewlWordlist-{RR} {WebSite}')
+        print(f'Scanned files saved in {O}Data/CewlWordlists/{W} ')
+        input(f'Press {O}ENTER{W} to continue!')
+        return Menus.WEB()
 
 #Class for interface settings
 class InterfaceOptions():
@@ -1135,10 +1131,6 @@ class Bruteforce():
                         return Bruteforce.DicSHA256(HPath, WLPath)
     def HccapxGen(HP, WL, Attack):
 
-        global TempPath
-
-        TempName = f'Temp-{RR}'
-        TempPath = f'Data/HandShakes/Temp/{TempName}.hccapx'
         HSPVerify = os.path.isfile(f'{HP}')
         if HSPVerify == True:
             os.system(f'sudo utils/Binaries/cap2hccapx.bin {HP} {TempPath}')

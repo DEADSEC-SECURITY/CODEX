@@ -3,7 +3,7 @@
 
 #-----------Welcome to DeAdSeC Python Codex----------#
 #-------Made By DeAdSeC-------#
-#---Version 2.1.5---#
+#---Version 2.2.5---#
 
 #IMPORT DEPENDENCYS
 import os
@@ -23,6 +23,9 @@ else:
     os.system('pip3 install pandas')
     print(f'{Plus}{G} Uninstalling NAMP ...{W}')
     os.system('pip3 uninstall nmap')
+    os.system('pip uninstall nmap')
+    print(f'{Plus}{G} Uninstalling Python-NAMP ...{W}')
+    os.system('pip uninstall python-nmap')
     print(f'{Plus}{G} Installing Python-NMAP ...{W}')
     os.system('pip3 install python-nmap')
     print(f'{Plus}{G} Installing NETIFACES ...{W}')
@@ -41,13 +44,22 @@ else:
     print(f'{Plus}{G} Installing CRUNCH ...{W}')
     os.system('sudo apt-get install crunch')
     print(f'{Plus}{G} Installing XTERM ...{W}')
-    os.system('sudo apt get install xterm')
+    os.system('sudo apt-get install xterm')
     print(f'{Plus}{G} Installing DRIFTNET ...{W}')
-    os.system('sudo apt install driftnet')
+    os.system('sudo apt-get install driftnet')
     print(f'{Plus}{G} Installing DRIFTNET ...{W}')
-    os.system('sudo apt install dsniff')
+    os.system('sudo apt-get install dsniff')
     print(f'{Plus}{G} Installing OPENCL ...{W}')
-    os.system('sudo apt install ocl-icd-opencl-dev')
+    os.system('sudo apt-get install ocl-icd-opencl-dev')
+    print(f'{Plus}{G} Installing UNRAR ...{W}')
+    os.system('sudo apt-get install unrar')
+    print(f'{Plus}{G} Installing RUBY ...{W}')
+    os.system('sudo apt-get install ruby')
     print(f'{Plus}{G} Installing UPDATE ...{W}')
     os.system('sudo apt-get update')
+    INPUT = str(input(f'{Plus}{G} Would you like to extract all wordlists? [Y/N] {W}'))
+    if INPUT == 'Y' or INPUT == 'y':
+        os.system('unrar e WordLists/BIG-WPA-LIST-1.rar WordLists/')
+        os.system('unrar e WordLists/BIG-WPA-LIST-2.rar WordLists/')
+        os.system('unrar e WordLists/BIG-WPA-LIST-3.rar WordLists/')
     print(f'{C}INSTALLATION FINISHED YOU CAN NOW LAUNCH CODEX')
