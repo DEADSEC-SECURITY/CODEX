@@ -1,4 +1,4 @@
-CODEX ![Python_Version](https://img.shields.io/badge/Python-3.7%2B-blue)
+**CODEX** ![Python_Version](https://img.shields.io/badge/Python-3.7%2B-blue)
 
 **CREADITS**
 
