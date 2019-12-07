@@ -1,4 +1,4 @@
-# CODEX ![Version](https://img.shields.io/badge/Version-v2.2.5-orange) ![Python_Version](https://img.shields.io/badge/Python-3.7%2B-blue) ![License](https://img.shields.io/badge/License-MIT-red)
+# CODEX ![Version](https://img.shields.io/badge/Version-v2.2.5-orange) ![Python_Version](https://img.shields.io/badge/Python-3.7%2B-blue) ![License](https://img.shields.io/badge/License-MIT-red) ![Donate](https://img.shields.io/badge/Donate-Crypto-yellow)
 
 **CREADITS**
 
