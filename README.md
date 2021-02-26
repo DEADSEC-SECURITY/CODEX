@@ -2,11 +2,7 @@
 
 ## 📝CONTRIBUTIONS
 
-Adding more distribution support compatibility!
-
-Adding and suggesting new features!
-
-Testing and sending feedback Donating!
+Before doing any contribution read <a href="https://github.com/DEADSEC-SECURITY/CODEX/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.
 
 ## 📧CONTACT
 
