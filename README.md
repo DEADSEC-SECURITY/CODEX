@@ -10,7 +10,7 @@ Email: amng835@gmail.com
 
 General Discord: https://discord.gg/dFD5HHa
 
-Developer Discord: https://discord.gg/vg5VHZbe
+Developer Discord: https://discord.gg/rxNNHYN9EQ
 
 ## ⚙️HOW TO USE
 
