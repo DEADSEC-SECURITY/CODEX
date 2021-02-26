@@ -9,6 +9,7 @@ Before doing any contribution read <a href="https://github.com/DEADSEC-SECURITY/
 Email: amng835@gmail.com
 
 General Discord: https://discord.gg/dFD5HHa
+
 Developer Discord: https://discord.gg/vg5VHZbe
 
 ## ⚙️HOW TO USE
