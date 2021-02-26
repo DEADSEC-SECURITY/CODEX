@@ -1,4 +1,6 @@
-If you enjoyed the script and found it useful, you can support the project making a donation. Sending a fraction of any of these cryptocurrencies. Any amount, not matter how small (1, 2, 5 $/€) is welcome.
+If you enjoy my work consider making a donation to help me be able to work full time in my projects. If you dont wanto to donate but want to contribute in a diferent way, that 100% ok, you can do that by forking my pojects with usefull implementation of recomending new features for me to add.
+
+Github sponsor.
 
 BitCoin Wallet: 1NQfnb7kBT8DevaU8i6krnVsNvKv9q3zTP
 
