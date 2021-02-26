@@ -2,7 +2,7 @@
 
 ## 📝CONTRIBUTIONS
 
-Before doing any contribution read <a href="https://github.com/DEADSEC-SECURITY/CODEX/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.
+Before doing any contribution read <a href="https://github.com/DEADSEC-SECURITY/CODEX/blob/master/CONTRIBUTING.md">CONTRIBUTING</a>.
 
 ## 📧CONTACT
 
