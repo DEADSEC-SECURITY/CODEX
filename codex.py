@@ -401,6 +401,8 @@ class Menus():
     def HANDSHAKE():
 
         Dir = "Data/HandShakes"
+        if not os.path.exists(Dir):
+            os.path.mkdir(Dir)
         ListDir = os.listdir(Dir)
 
         #Will search for items that end in .cs and .netxml and deleat them!
@@ -575,6 +577,8 @@ class Menus():
     def DataCaptureMenu():
 
         Dir = "Data/CaptureData"
+        if not os.path.exists(Dir):
+            os.path.mkdir(Dir)
         ListDir = os.listdir(Dir)
 
         #Will search for items that end in .cs and .netxml and deleat them!
